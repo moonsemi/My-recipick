@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c55cb8b3-f2cb-450e-8c72-692df2a82ca3" name="Default Changelist" comment="" />
+    <list default="true" id="c55cb8b3-f2cb-450e-8c72-692df2a82ca3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kims_recipe.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_recipic.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_recipic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paik_official_recipe.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/paik_recipe.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,10 +23,12 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/My-recipick" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Xmo6FdZwBgaNxEtZLd9N3khbCh" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -26,6 +36,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager" selected="Python.my_recipic">
@@ -42,6 +53,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/my_recipic.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="paik_follow_recipes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python_project_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/paik_follow_recipes.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -71,7 +103,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="paik_official_recipe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="paik_official_recipes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python_project_test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -83,7 +115,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\문세미\Desktop\sparta\python_project_test\paik_official_recipe.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/paik_official_recipes.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -134,34 +166,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="paik_recipe" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="python_project_test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\문세미\Desktop\sparta\python_project_test\paik_recipe.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.my_recipic" />
+        <item itemvalue="Python.paik_follow_recipes" />
+        <item itemvalue="Python.paik_official_recipes" />
         <item itemvalue="Python.paik_official_recipe (1)" />
         <item itemvalue="Python.paik_recipe (1)" />
-        <item itemvalue="Python.paik_recipe" />
-        <item itemvalue="Python.paik_official_recipe" />
       </list>
     </recent_temporary>
   </component>
@@ -199,59 +210,62 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1798" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1581680652562" />
-    <state width="1033" height="286" key="GridCell.Tab.0.bottom" timestamp="1582124411736">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1117" height="311" key="GridCell.Tab.0.bottom" timestamp="1582461891128">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1033" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582124411736" />
-    <state width="1033" height="286" key="GridCell.Tab.0.center" timestamp="1582124411736">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025934" />
+    <state width="1117" height="311" key="GridCell.Tab.0.bottom/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891128" />
+    <state width="1117" height="311" key="GridCell.Tab.0.center" timestamp="1582461891128">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1033" height="286" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582124411736" />
-    <state width="1033" height="286" key="GridCell.Tab.0.left" timestamp="1582124411735">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="286" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025934" />
+    <state width="1117" height="311" key="GridCell.Tab.0.center/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891128" />
+    <state width="1117" height="311" key="GridCell.Tab.0.left" timestamp="1582461891127">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1033" height="286" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582124411735" />
-    <state width="1033" height="286" key="GridCell.Tab.0.right" timestamp="1582124411736">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="286" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025933" />
+    <state width="1117" height="311" key="GridCell.Tab.0.left/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891127" />
+    <state width="1117" height="311" key="GridCell.Tab.0.right" timestamp="1582461891128">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1033" height="286" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582124411736" />
-    <state width="1023" height="319" key="GridCell.Tab.1.bottom" timestamp="1581921130619">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="286" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025934" />
+    <state width="1117" height="311" key="GridCell.Tab.0.right/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891128" />
+    <state width="1039" height="357" key="GridCell.Tab.1.bottom" timestamp="1582460127628">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1023" height="319" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581921130619" />
-    <state width="1023" height="319" key="GridCell.Tab.1.center" timestamp="1581921130619">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="357" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582202872836" />
+    <state width="1039" height="357" key="GridCell.Tab.1.bottom/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582460127628" />
+    <state width="1039" height="357" key="GridCell.Tab.1.center" timestamp="1582460127627">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1023" height="319" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581921130619" />
-    <state width="1023" height="319" key="GridCell.Tab.1.left" timestamp="1581921130619">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="357" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582202872835" />
+    <state width="1039" height="357" key="GridCell.Tab.1.center/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582460127627" />
+    <state width="1039" height="357" key="GridCell.Tab.1.left" timestamp="1582460127627">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1023" height="319" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581921130619" />
-    <state width="1023" height="319" key="GridCell.Tab.1.right" timestamp="1581921130619">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1039" height="357" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582202872835" />
+    <state width="1039" height="357" key="GridCell.Tab.1.left/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582460127627" />
+    <state width="1039" height="357" key="GridCell.Tab.1.right" timestamp="1582460127628">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state width="1023" height="319" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581921130619" />
+    <state width="1039" height="357" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582202872836" />
+    <state width="1039" height="357" key="GridCell.Tab.1.right/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582460127628" />
     <state x="669" y="253" width="745" height="608" key="find.popup" timestamp="1582123724164">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="669" y="253" width="745" height="608" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582123724164" />
-    <state x="515" y="226" width="670" height="676" key="search.everywhere.popup" timestamp="1581925947923">
+    <state x="515" y="226" width="672" height="676" key="search.everywhere.popup" timestamp="1582201837785">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="515" y="226" width="670" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581925947923" />
+    <state x="515" y="226" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582201837785" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/paik_recipe.py</url>
-          <line>22</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/paik_recipe.py</url>
-          <line>23</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/paik_follow_recipes.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

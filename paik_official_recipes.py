@@ -17,6 +17,8 @@ driver.implicitly_wait(3)
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 driver.implicitly_wait(3)
 driver.find_element_by_class_name("btn_lst_more").click()
+driver.implicitly_wait(3)
+driver.find_element_by_class_name("btn_lst_more").click()
 # 레시피 100개까지 추출 / 참고)document.body.scrollHeight : 페이지 세로 길이
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -26,7 +28,7 @@ paik_official_recipes = soup.select('#_my_list_container > ul.lst_feed > li._cds
 # insert 할 데이터 셋트를 만듦
 paik_official_recipes_doc = {
     'image': '',
-    'name': '',
+    'category': '',
     'title': '',
     'posting_day': '',
     'description': '',
@@ -37,8 +39,8 @@ paik_official_recipes_doc = {
 for paik_official_recipe in paik_official_recipes:
     image = paik_official_recipe.select_one('a.link_end img').attrs['src']
     print(image)
-    name = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a > strong').text.split()[0]
-    print(name)
+    category = '공식레시피'
+    print(category)
     title = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a > strong').text.split()[1]
     print(title)
     posting_day = paik_official_recipe.select_one('div > div.feed_head > div > div.info_post > time').text
@@ -46,7 +48,7 @@ for paik_official_recipe in paik_official_recipes:
     # Q : 2020.02.14. -> 2020.02.14 마지막 '.'을 삭제하는 방법
     description = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a > p').text
     print(description)
-    author = '집밥백선생 블로그'
+    author = '집밥백선생'
     print(author)
     pre_url = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a').get('href')
     url = 'https://post.naver.com/' + pre_url
@@ -54,7 +56,7 @@ for paik_official_recipe in paik_official_recipes:
 
     paik_official_recipes_doc = {
         'image': image,
-        'name': name,
+        'category': category,
         'title': title,
         'posting_day': posting_day,
         'description': description,
@@ -62,4 +64,4 @@ for paik_official_recipe in paik_official_recipes:
         'url': url
     }
 
-    db.paik_official_recipes.insert_one(paik_official_recipes_doc)
+    db.paik_all_recipes.insert_one(paik_official_recipes_doc)

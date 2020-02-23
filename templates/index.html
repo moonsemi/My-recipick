@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<!-- web-font CSS -->
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" href="http://example.com/myicon.png">
 	<!-- JQuery를 import 합니다 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
@@ -64,7 +65,8 @@
 						 		<p class="card-text">'+posting_day+'</p>\
 						 		<p class="card-text">'+description+'</p>\
 	     						<p class="card-text">'+author+'</p>\
-	     						<a href="'+url+'" class="btn btn-primary" target="_blank">레시피 보기</a>\
+	     						<a href="'+url+'" class="btn btn-primary" id="url_recipe" target="_blank">레시피 보기</a>\
+	     						<a href="'+url+'" onclick="copy_trackback(this.href); return false;">url 저장</a>\
 						 	</div>\
 	      				</div>';
 						$('#paik_official').append(card_tamp);
@@ -78,44 +80,127 @@
 						 		<p class="card-text">'+posting_day+'</p>\
 						 		<p class="card-text">'+description+'</p>\
 	     						<p class="card-text">'+author+'</p>\
-	     						<a href="'+url+'" class="btn btn-primary" target="_blank">레시피 보기</a>\
+	     						<a href="'+url+'" class="btn btn-primary" id="url_recipe" target="_blank">레시피 보기</a>\
+	     						<a href="'+url+'" onclick="copy_trackback(this.href); return false;">url 저장</a>\
 						 	</div>\
 	      				</div>';
 						$('#paik_follow').append(card_tamp);
 	    }	
 
-	    function order() {
-	      let name = $('#exampleInputName').val();
-	      let count = $('#exampleFormControlSelect1').val();
-	      let addr = $('#exampleInputAddr').val();
-	      let tel = $('#exampleInputTel').val();
-	      let regExp = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+	    // function order() {
+	    //   let name = $('#exampleInputName').val();
+	    //   let count = $('#exampleFormControlSelect1').val();
+	    //   let addr = $('#exampleInputAddr').val();
+	    //   let tel = $('#exampleInputTel').val();
+	    //   let regExp = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 	      
-	      if(name ==''){
-	        alert('성함을 입력해주세요!');
-	        $('#exampleInputName').focus();
-	        return false;
-	      }else if(count ==''){
-	        alert('수량을 입력해주세요!');
-	        $('#exampleFormControlSelect1').focus();
-	        return false;
-	      }else if(addr ==''){
-	        alert('주소를 입력해주세요!');
-	        $('#exampleInputAddr').focus();
-	        return false;
-	      }else if(tel ==''){
-	        alert('전화번호를 입력해주세요!');
-	        $('#exampleInputTel').focus();
-	        return false;
-	      }else if(!regExp.test(tel)){
-	        alert("잘못된 휴대폰 번호입니다. 숫자, -를 제외한 숫자만 입력하세요.");
-	        return false;
-	      }
-	    }
+	    //   if(name ==''){
+	    //     alert('성함을 입력해주세요!');
+	    //     $('#exampleInputName').focus();
+	    //     return false;
+	    //   }else if(count ==''){
+	    //     alert('수량을 입력해주세요!');
+	    //     $('#exampleFormControlSelect1').focus();
+	    //     return false;
+	    //   }else if(addr ==''){
+	    //     alert('주소를 입력해주세요!');
+	    //     $('#exampleInputAddr').focus();
+	    //     return false;
+	    //   }else if(tel ==''){
+	    //     alert('전화번호를 입력해주세요!');
+	    //     $('#exampleInputTel').focus();
+	    //     return false;
+	    //   }else if(!regExp.test(tel)){
+	    //     alert("잘못된 휴대폰 번호입니다. 숫자, -를 제외한 숫자만 입력하세요.");
+	    //     return false;
+	    //   }
+	    // }
+
+	  //   function search() {
+	  //   	let recipe = $('#test').val();
+	  //   	// ajax 코드 - paik_follow_recipes
+	  //     	$.ajax({
+		 //        type: "GET",
+		 //        url: "/follow_recipes",
+		 //        data: {},
+		 //        success: function(response){
+		 //          if (response['result'] == 'success') {
+		 //            let paik_follow = response['paik_follow'];
+		 //            console.log(paik_follow);
+		 //            for (let i = 0; i < paik_follow.length; i++) {
+		 //               paik_follow_recipe_list(paik_follow[i]['image'],paik_follow[i]['title'],paik_follow[i]['posting_day'],paik_follow[i]['description'],paik_follow[i]['author'],paik_follow[i]['url'])
+		 //            }
+		 //          } else {
+		 //            alert('레시피를 받아오지 못했습니다');
+		 //          }
+		 //        }
+	  //     	})
+
+	  //   	$.ajax({
+			// 	type: "POST",
+			// 	url: "/follow_recipes",
+			// 	data: {name_give:name, count_give:count, addr_give:addr, tel_give:tel},
+			// 	success: function(response){
+			// 		if (response['result'] == 'success') {
+			// 			alert('주문이 완료되었습니다!')
+			// 			window.location.reload();
+			// 			//다시 1단계부터 시작해!
+			// 		}
+			// 	}
+			// })
+	  //   }
+
+	    function copy_trackback(trb) {
+			var IE=(document.all)?true:false;
+			if (IE) {
+			if(confirm("이 글의 트랙백 주소를 클립보드에 복사하시겠습니까?"))
+			window.clipboardData.setData("Text", trb);
+			} else {
+			temp = prompt("아래 URL을 복사(Ctrl+C)하여 원하는 곳에 붙여넣기(Ctrl+V)하세요.", trb);
+			}
+		}
+
+		function recipe_save(){
+			// 읽기
+			let email = $('#posting-email').val();
+			let url = $('#posting-url').val();
+
+			if(email ==''){
+		        alert('이메일을 입력해주세요!');
+		        $('#posting-email').focus();
+		        return false;
+ 	        }else if(url ==''){
+		        alert('URL을 입력해주세요!');
+		        $('#posting-url').focus();
+		        return false;
+	        }
+
+			// 우리가 크롬 콘솔창에서 썼던 그 코드!
+			$.ajax({
+				type: "POST", // POST 방식으로 요청하겠다.
+				url: "/save_follow_recipe", // /post라는 url에 요청하겠다.
+				data: { url_give: url, email_give: email }, // 데이터를 주는 방법
+				success: function(response){ // 성공하면
+					if (response['result'] == 'success') {
+					alert('레시피 저장 성공!');
+					window.location.reload();
+					} else {
+					alert('서버 오류!')
+					}
+				}
+			})
+		}
 	</script>
 </head>
 <body>
 	<div class="wrap">
+		<div class="recipes_save_container">
+			<h1>레시피 담기</h1>
+			<input type="text" id="posting-email" placeholder="email">
+			<input type="text" id="posting-url" placeholder="url">
+			<button onclick="recipe_save()">레시피 저장</button>
+		</div>
+
 		<div class="paik_recipe_container">
 			<div class="paik_official_recipe_area">
 				<h1>[백종원 공식레시피]</h1>
@@ -123,31 +208,34 @@
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="" alt="ard image cap">
 						<div class="card-body">
-						  <h5 class="card-title">김치찌개</h5>
-						  <p class="card-text">2017.11.29.</p>
-						  <p class="card-text">백선생 김치찌개 만들기by 집밥 백선생김치로 만들 수 있는 최적의 요리!'한국인이 좋아하는 음식' 하면빼놓지 않고 등장하는 김치찌개쌀쌀한 날씨에 얼큰한 국물로얼어붙은 속도 풀고~ 기분전환까지!!타국에서 생활···</p>
-						  <p class="card-text">집밥백선생 블로그</p>
-						  <a href="#" class="btn btn-primary">레시피 보기</a>
+					  		<h5 class="card-title">김치찌개</h5>
+							<p class="card-text">2017.11.29.</p>
+							<p class="card-text">백선생 김치찌개 만들기by 집밥 백선생김치로 만들 수 있는 최적의 요리!'한국인이 좋아하는 음식' 하면빼놓지 않고 등장하는 김치찌개쌀쌀한 날씨에 얼큰한 국물로얼어붙은 속도 풀고~ 기분전환까지!!타국에서 생활···</p>
+							<p class="card-text">집밥백선생 블로그</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
 						</div>
 					</div>
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="" alt="ard image cap">
 						<div class="card-body">
-						  <h5 class="card-title">돈가스김치나베</h5>
-						  <p class="card-text">2017.10.25.</p>
-						  <p class="card-text">백선생 돈가스김치나베 만들기by 집밥 백선생돈가스, 튀겨만 먹기 지겹다면?돈가스를 활용해 만드는 일품요리!쌀쌀한 날씨에 제대로 안성맞춤~국물로 즐기는 돈가스김치나베지금 시작합니다![재료: 식용유, 돈가스, ···</p>
-						  <p class="card-text">집밥백선생 블로그</p>
-						  <a href="#" class="btn btn-primary">레시피 보기</a>
+							<h5 class="card-title">돈가스김치나베</h5>
+							<p class="card-text">2017.10.25.</p>
+							<p class="card-text">백선생 돈가스김치나베 만들기by 집밥 백선생돈가스, 튀겨만 먹기 지겹다면?돈가스를 활용해 만드는 일품요리!쌀쌀한 날씨에 제대로 안성맞춤~국물로 즐기는 돈가스김치나베지금 시작합니다![재료: 식용유, 돈가스, ···</p>
+							<p class="card-text">집밥백선생 블로그</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
 						</div>
 					</div>
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="" alt="ard image cap">
 						<div class="card-body">
-						  <h5 class="card-title">갈비볶음탕</h5>
-						  <p class="card-text">2017.11.08.</p>
-						  <p class="card-text">백선생 갈비볶음탕 만들기by 집밥 백선생닭볶음탕을 위협하는 볶음탕계의 신흥강자!매력적인 담백함으로 승부한다!그 이름도 찬란한 갈비볶음탕지금 시작합니다!※돼지갈비 초벌, 삶는 법은'집밥백선생 돼지갈비탕 만···</p>
-						  <p class="card-text">집밥백선생 블로그</p>
-						  <a href="#" class="btn btn-primary">레시피 보기</a>
+							<h5 class="card-title">갈비볶음탕</h5>
+							<p class="card-text">2017.11.08.</p>
+							<p class="card-text">백선생 갈비볶음탕 만들기by 집밥 백선생닭볶음탕을 위협하는 볶음탕계의 신흥강자!매력적인 담백함으로 승부한다!그 이름도 찬란한 갈비볶음탕지금 시작합니다!※돼지갈비 초벌, 삶는 법은'집밥백선생 돼지갈비탕 만···</p>
+							<p class="card-text">집밥백선생 블로그</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
 						</div>
 					</div>
 				</div>
@@ -159,31 +247,34 @@
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="" alt="ard image cap">
 						<div class="card-body">
-						  <h5 class="card-title">백종원 닭볶음탕 역시 믿고 만드는 레시피</h5>
-						  <p class="card-text">2020.01.31.</p>
-						  <p class="card-text">방식으로 만드는데 백종원 레시피처럼 국물 넉넉하게 만들어서 닭고기에 촉촉히 적셔먹는것도 참 맛있네요 역시 믿고만드는 검증된 레시피 백종원 닭볶음탕이였습니다 ^^</p>
-						  <p class="card-text">하이! 미세스뽀</p>
-						  <a href="#" class="btn btn-primary">레시피 보기</a>
+							<h5 class="card-title">백종원 닭볶음탕 역시 믿고 만드는 레시피</h5>
+							<p class="card-text">2020.01.31.</p>
+							<p class="card-text">방식으로 만드는데 백종원 레시피처럼 국물 넉넉하게 만들어서 닭고기에 촉촉히 적셔먹는것도 참 맛있네요 역시 믿고만드는 검증된 레시피 백종원 닭볶음탕이였습니다 ^^</p>
+							<p class="card-text">하이! 미세스뽀</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
 						</div>
 					</div>
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="" alt="ard image cap">
 						<div class="card-body">
-						  <h5 class="card-title">배추겉절이 황금레시피 난 늘 백종원 표로</h5>
-						  <p class="card-text">2017.10.26.</p>
-						  <p class="card-text">그냥 백종원 레시피로 해주심 되지 않을까 싶네요. 요즘 달달한 가을배추가 참... 배추겉절이 황금레시피 역시 백종원 표로 만들면 손쉽고 맛있어 좋더라... 이것이지요....</p>
-						  <p class="card-text">곰세마리의 앤돌핀 ...</p>
-						  <a href="#" class="btn btn-primary">레시피 보기</a>
+							<h5 class="card-title">배추겉절이 황금레시피 난 늘 백종원 표로</h5>
+							<p class="card-text">2017.10.26.</p>
+							<p class="card-text">그냥 백종원 레시피로 해주심 되지 않을까 싶네요. 요즘 달달한 가을배추가 참... 배추겉절이 황금레시피 역시 백종원 표로 만들면 손쉽고 맛있어 좋더라... 이것이지요....</p>
+							<p class="card-text">곰세마리의 앤돌핀 ...</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
 						</div>
 					</div>
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="" alt="ard image cap">
 						<div class="card-body">
-						  <h5 class="card-title">백종원 떡볶이 레시피 따라해보기~</h5>
-						  <p class="card-text">2020.02.07.</p>
-						  <p class="card-text">오늘은 #백종원레시피 로 만들어 놓고, 전화 통화를 마무리 했더니 어머나~~~ 두 녀석이 거의 다 먹어치웠네요~~ᅟᅲᅟᅲ 백종원떡볶이레시피의 포인트는 바로 요거!!...</p>
-						  <p class="card-text">토방이네는 지금......</p>
-						  <a href="#" class="btn btn-primary">레시피 보기</a>
+							<h5 class="card-title">백종원 떡볶이 레시피 따라해보기~</h5>
+							<p class="card-text">2020.02.07.</p>
+							<p class="card-text">오늘은 #백종원레시피 로 만들어 놓고, 전화 통화를 마무리 했더니 어머나~~~ 두 녀석이 거의 다 먹어치웠네요~~ᅟᅲᅟᅲ 백종원떡볶이레시피의 포인트는 바로 요거!!...</p>
+							<p class="card-text">토방이네는 지금......</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
 						</div>
 					</div>
 				</div>
