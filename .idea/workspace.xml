@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c55cb8b3-f2cb-450e-8c72-692df2a82ca3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kims_recipe.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/my_recipic.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_recipic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paik_official_recipe.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/paik_recipe.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/paik_follow_recipes.py" beforeDir="false" afterPath="$PROJECT_DIR$/paik_follow_recipes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paik_official_recipes.py" beforeDir="false" afterPath="$PROJECT_DIR$/paik_official_recipes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -210,26 +208,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1798" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1581680652562" />
-    <state width="1117" height="311" key="GridCell.Tab.0.bottom" timestamp="1582461891128">
-      <screen x="0" y="0" width="1680" height="1010" />
+    <state width="1414" height="248" key="GridCell.Tab.0.bottom" timestamp="1582788978823">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1039" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025934" />
-    <state width="1117" height="311" key="GridCell.Tab.0.bottom/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891128" />
-    <state width="1117" height="311" key="GridCell.Tab.0.center" timestamp="1582461891128">
-      <screen x="0" y="0" width="1680" height="1010" />
+    <state width="1414" height="248" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582788978823" />
+    <state width="1063" height="311" key="GridCell.Tab.0.bottom/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582472763284" />
+    <state width="1414" height="248" key="GridCell.Tab.0.center" timestamp="1582788978823">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1039" height="286" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025934" />
-    <state width="1117" height="311" key="GridCell.Tab.0.center/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891128" />
-    <state width="1117" height="311" key="GridCell.Tab.0.left" timestamp="1582461891127">
-      <screen x="0" y="0" width="1680" height="1010" />
+    <state width="1414" height="248" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582788978823" />
+    <state width="1063" height="311" key="GridCell.Tab.0.center/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582472763283" />
+    <state width="1414" height="248" key="GridCell.Tab.0.left" timestamp="1582788978822">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1039" height="286" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025933" />
-    <state width="1117" height="311" key="GridCell.Tab.0.left/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891127" />
-    <state width="1117" height="311" key="GridCell.Tab.0.right" timestamp="1582461891128">
-      <screen x="0" y="0" width="1680" height="1010" />
+    <state width="1414" height="248" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582788978822" />
+    <state width="1063" height="311" key="GridCell.Tab.0.left/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582472763283" />
+    <state width="1414" height="248" key="GridCell.Tab.0.right" timestamp="1582788978823">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1039" height="286" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582285025934" />
-    <state width="1117" height="311" key="GridCell.Tab.0.right/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582461891128" />
+    <state width="1414" height="248" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582788978823" />
+    <state width="1063" height="311" key="GridCell.Tab.0.right/1680.6.1920.1040/0.0.1680.1010@0.0.1680.1010" timestamp="1582472763283" />
     <state width="1039" height="357" key="GridCell.Tab.1.bottom" timestamp="1582460127628">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
@@ -258,16 +256,5 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="515" y="226" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582201837785" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/paik_follow_recipes.py</url>
-          <line>13</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -13,13 +13,14 @@ driver = webdriver.Chrome(r'C:\Users\문세미\Downloads\chromedriver_win32/chro
 driver.get('https://post.naver.com/my.nhn?memberNo=19357942')
 # 조건을 검색해야하는 사이트를 들어간다.
 
-driver.implicitly_wait(3)
-driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-driver.implicitly_wait(3)
-driver.find_element_by_class_name("btn_lst_more").click()
-driver.implicitly_wait(3)
-driver.find_element_by_class_name("btn_lst_more").click()
-# 레시피 100개까지 추출 / 참고)document.body.scrollHeight : 페이지 세로 길이
+for page_num in range(1,21) :
+    # '더보기'버튼 20번 클릭
+    # more_btn > button
+    # // *[ @ id = "more_btn"] / button
+    btn = driver.find_element_by_xpath('//*[@id="more_btn"]/button')
+    btn.click()
+    # 로딩 시간이 있으므로 타이밍 맞추기 위해 사용
+    driver.implicitly_wait(10)
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -41,7 +42,8 @@ for paik_official_recipe in paik_official_recipes:
     print(image)
     category = '공식레시피'
     print(category)
-    title = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a > strong').text.split()[1]
+    title = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a > strong').text.replace("집밥백선생",' ').replace("만들기",' ').replace("굽기",' ').replace(".",' ').strip()
+    # title = paik_official_recipe.select_one('div > div.feed_body > div.text_area > a > strong').text.split()[1].strip()
     print(title)
     posting_day = paik_official_recipe.select_one('div > div.feed_head > div > div.info_post > time').text
     print(posting_day)

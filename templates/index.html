@@ -87,69 +87,6 @@
 						$('#paik_follow').append(card_tamp);
 	    }	
 
-	    // function order() {
-	    //   let name = $('#exampleInputName').val();
-	    //   let count = $('#exampleFormControlSelect1').val();
-	    //   let addr = $('#exampleInputAddr').val();
-	    //   let tel = $('#exampleInputTel').val();
-	    //   let regExp = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-	      
-	    //   if(name ==''){
-	    //     alert('성함을 입력해주세요!');
-	    //     $('#exampleInputName').focus();
-	    //     return false;
-	    //   }else if(count ==''){
-	    //     alert('수량을 입력해주세요!');
-	    //     $('#exampleFormControlSelect1').focus();
-	    //     return false;
-	    //   }else if(addr ==''){
-	    //     alert('주소를 입력해주세요!');
-	    //     $('#exampleInputAddr').focus();
-	    //     return false;
-	    //   }else if(tel ==''){
-	    //     alert('전화번호를 입력해주세요!');
-	    //     $('#exampleInputTel').focus();
-	    //     return false;
-	    //   }else if(!regExp.test(tel)){
-	    //     alert("잘못된 휴대폰 번호입니다. 숫자, -를 제외한 숫자만 입력하세요.");
-	    //     return false;
-	    //   }
-	    // }
-
-	  //   function search() {
-	  //   	let recipe = $('#test').val();
-	  //   	// ajax 코드 - paik_follow_recipes
-	  //     	$.ajax({
-		 //        type: "GET",
-		 //        url: "/follow_recipes",
-		 //        data: {},
-		 //        success: function(response){
-		 //          if (response['result'] == 'success') {
-		 //            let paik_follow = response['paik_follow'];
-		 //            console.log(paik_follow);
-		 //            for (let i = 0; i < paik_follow.length; i++) {
-		 //               paik_follow_recipe_list(paik_follow[i]['image'],paik_follow[i]['title'],paik_follow[i]['posting_day'],paik_follow[i]['description'],paik_follow[i]['author'],paik_follow[i]['url'])
-		 //            }
-		 //          } else {
-		 //            alert('레시피를 받아오지 못했습니다');
-		 //          }
-		 //        }
-	  //     	})
-
-	  //   	$.ajax({
-			// 	type: "POST",
-			// 	url: "/follow_recipes",
-			// 	data: {name_give:name, count_give:count, addr_give:addr, tel_give:tel},
-			// 	success: function(response){
-			// 		if (response['result'] == 'success') {
-			// 			alert('주문이 완료되었습니다!')
-			// 			window.location.reload();
-			// 			//다시 1단계부터 시작해!
-			// 		}
-			// 	}
-			// })
-	  //   }
-
 	    function copy_trackback(trb) {
 			var IE=(document.all)?true:false;
 			if (IE) {
@@ -162,7 +99,7 @@
 
 		function recipe_save(){
 			// 읽기
-			let email = $('#posting-email').val();
+			let email = $('#posting-email').val();			
 			let url = $('#posting-url').val();
 
 			if(email ==''){
@@ -175,18 +112,64 @@
 		        return false;
 	        }
 
-			// 우리가 크롬 콘솔창에서 썼던 그 코드!
 			$.ajax({
 				type: "POST", // POST 방식으로 요청하겠다.
-				url: "/save_follow_recipe", // /post라는 url에 요청하겠다.
+				url: "/save_paik_recipe", // /post라는 url에 요청하겠다.
 				data: { url_give: url, email_give: email }, // 데이터를 주는 방법
 				success: function(response){ // 성공하면
 					if (response['result'] == 'success') {
-					alert('레시피 저장 성공!');
-					window.location.reload();
+						alert('레시피 저장 성공!');
+						window.location.reload();
 					} else {
-					alert('서버 오류!')
+						alert('서버 오류!')
 					}
+				}
+			})
+		}
+
+		function myrecipes_paik_view(){
+			let email = $('#user_email').val();		
+			if(email ==''){
+		        alert('이메일을 입력해주세요!');
+		        $('#user_email').focus();
+		        return false;
+	        }
+
+	        $('#paik_official').html('');
+	        $('#paik_follow').html('');
+
+
+			$.ajax({
+				type: "GET",
+				url: "/myrecipes_official_view?email_give=" + email,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let myrecipes_official_info = response['myrecipes_official_info'];
+			            console.log(myrecipes_official_info);
+			            for (let i = 0; i < myrecipes_official_info.length; i++) {
+			               paik_official_recipe_list(myrecipes_official_info[i]['image'],myrecipes_official_info[i]['title'],myrecipes_official_info[i]['posting_day'],myrecipes_official_info[i]['description'],myrecipes_official_info[i]['author'],myrecipes_official_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
+				}
+			})
+
+			$.ajax({
+				type: "GET",
+				url: "/myrecipes_follow_view?email_give=" + email,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let myrecipes_follow_info = response['myrecipes_follow_info'];
+			            console.log(myrecipes_follow_info);
+			            for (let i = 0; i < myrecipes_follow_info.length; i++) {
+			               paik_follow_recipe_list(myrecipes_follow_info[i]['image'],myrecipes_follow_info[i]['title'],myrecipes_follow_info[i]['posting_day'],myrecipes_follow_info[i]['description'],myrecipes_follow_info[i]['author'],myrecipes_follow_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
 				}
 			})
 		}
@@ -200,7 +183,13 @@
 			<input type="text" id="posting-url" placeholder="url">
 			<button onclick="recipe_save()">레시피 저장</button>
 		</div>
-
+		<hr/>
+		<div class="myrecipes_view_container">
+			<h1>내가 담은 레시피가 보고싶다면?</h1>
+			<input type="text" id="user_email" placeholder="email">
+			<button onclick="myrecipes_paik_view()">나의레시피 보기</button>
+		</div>
+		<hr/>
 		<div class="paik_recipe_container">
 			<div class="paik_official_recipe_area">
 				<h1>[백종원 공식레시피]</h1>
