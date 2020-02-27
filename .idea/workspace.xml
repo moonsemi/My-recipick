@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c55cb8b3-f2cb-450e-8c72-692df2a82ca3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_recipic.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_recipic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paik_follow_recipes.py" beforeDir="false" afterPath="$PROJECT_DIR$/paik_follow_recipes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paik_official_recipes.py" beforeDir="false" afterPath="$PROJECT_DIR$/paik_official_recipes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +30,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
