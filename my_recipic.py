@@ -64,7 +64,7 @@ def save_paik_recipe():
     paik_recipes_info = db.paik_all_recipes.find_one({'url': url_receive}, {'_id': 0})['category']
     print(paik_recipes_info)
 
-    if paik_recipes_info == '따라하기레시피' :
+    if paik_recipes_info == '따라하기레시피':
         db.save_paik_follow.insert_one({
             'email': email_receive,
             'url': url_receive,
@@ -88,37 +88,38 @@ def myrecipes_official_view():
     # print(email_receive)
     # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
     myrecipes_official_user_info = list(db.save_paik_official.find({'email': email_receive}, {'_id': 0}))
-    print(myrecipes_official_user_info)
-    for email_receive in myrecipes_official_user_info :
-        print(email_receive)
-        target_url = email_receive['url']
-        print(target_url)
-    myrecipes_official_info = list(db.paik_all_recipes.find({'url': target_url},{'_id': 0}))
-    print(myrecipes_official_info)
-    for target_url in myrecipes_official_info :
-        print(target_url)
-        return jsonify({'result': 'success', 'myrecipes_official_info': myrecipes_official_info})
+    # print(myrecipes_official_user_info)
+    list_myrecipes_official_info = []
+    for user_email in myrecipes_official_user_info:
+        # print(user_email)
+        target_url = user_email['url']
+        # print(target_url)
+        myrecipes_official_infos = db.paik_all_recipes.find_one({'url': target_url}, {'_id': 0})
+        list_myrecipes_official_info.append(myrecipes_official_infos)
+        # print(list_myrecipes_official_info)
+
+    return jsonify({'result': 'success', 'myrecipes_official_info': list_myrecipes_official_info})
 
 
-# @app.route('/myrecipes_follow_view', methods=['GET'])
-# def myrecipes_follow_view():
-#     # email_give로 클라이언트가 준 email을 가져오기
-#     email_receive = request.args.get('email_give')
-#     # print(email_receive)
-#     # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
-#     myrecipes_follow_url_info = list(db.save_paik_follow.find({'email': email_receive}, {'_id': 0}))
-#     # print(myrecipes_official_url_info)
-#     for email in myrecipes_follow_url_info:
-#         # print(email['url'])
-#         target_url = email['url']
-#         # print(target_url)
-#         # if target_url ==
-#         # ㄴ 코드리뷰 !!!!!!!!!!!!!!!!! 레시피url이 중복이면 하나의 url만 보여주기 !!!!!!!!!!!!!!!!! 코드리뷰
-#
-#         myrecipes_follow_info = list(db.paik_all_recipes.find({'url': target_url}, {'_id': 0}))
-#         # print(myrecipes_official_info)
-#         return jsonify({'result': 'success', 'myrecipes_follow_info': myrecipes_follow_info})
+@app.route('/myrecipes_follow_view', methods=['GET'])
+def myrecipes_follow_view():
+    # email_give로 클라이언트가 준 email을 가져오기
+    email_receive = request.args.get('email_give')
+    # print(email_receive)
+    # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
+    myrecipes_follow_user_info = list(db.save_paik_follow.find({'email': email_receive}, {'_id': 0}))
+    # print(myrecipes_official_user_info)
+    list_myrecipes_follow_info = []
+    for user_email in myrecipes_follow_user_info:
+        # print(user_email)
+        target_url = user_email['url']
+        # print(target_url)
+        myrecipes_follow_user_infos = db.paik_all_recipes.find_one({'url': target_url}, {'_id': 0})
+        list_myrecipes_follow_info.append(myrecipes_follow_user_infos)
+        # print(list_myrecipes_follow_info)
+
+    return jsonify({'result': 'success', 'myrecipes_follow_info': list_myrecipes_follow_info})
 
 
 if __name__ == '__main__':
-    app.run('localhost', port=5000, debug=True)
+    app.run('localhost', port=9980, debug=True)
