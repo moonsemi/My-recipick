@@ -37,6 +37,7 @@ def follow_recipes_view():
 # 김수미 공식레시피 API
 @app.route('/s_official_recipes', methods=['GET'])
 def official_recipes_view():
+
 def s_official_recipes_view():
     # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
     soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
