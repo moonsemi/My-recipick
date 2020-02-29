@@ -15,8 +15,8 @@ def home():
 
 
 ### API 역할을 하는 부분
-## 레시피 리스트로 보여주기
 
+##################################### 레시피 리스팅 API ######################################
 # Developer 문세미
 # 백종원 공식레시피 API
 @app.route('/official_recipes', methods=['GET'])
@@ -36,21 +36,21 @@ def follow_recipes_view():
 # Developer 조원행
 # 김수미 공식레시피 API
 @app.route('/s_official_recipes', methods=['GET'])
-def official_recipes_view():
+def s_official_recipes_view():
     # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
     soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
     return jsonify({'result': 'success', 'soomis_official': soomis_official})
 
 # 김수미 따라하기레시피 API
 @app.route('/s_follow_recipes', methods=['GET'])
-def follow_recipes_view():
+def s_follow_recipes_view():
     # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '따라하기레시피' 가져오기
     soomis_follow = list(db.soomi_all_recipes.find({'category':'따라하기 레시피'}, {'_id': 0}))
     return jsonify({'result': 'success', 'soomis_follow': soomis_follow})
 
 
 
-##################################### 레시피검색 API ######################################
+##################################### 레시피 검색 API ######################################
 # Developer 문세미
 # 백종원 따라하기 레시피 검색 api
 @app.route('/search_paik_follow', methods=['GET'])
@@ -75,7 +75,6 @@ def search_paik_official_view():
     return jsonify({'result': 'success', 'official_recipe_info': official_recipe_info})
 
 
-
 # Developer 조원행
 # 김수미 따라하기 레시피 검색 api
 @app.route('/search_soomi_follow', methods=['GET'])
@@ -98,8 +97,7 @@ def search_soomi_official_view():
     return jsonify({'result': 'success', 'soomis_official_info': soomis_official_info})
 
 
-
-##################################### 레시피저장 API ######################################
+##################################### 레시피 저장 API ######################################
 # Developer 문세미
 @app.route('/save_paik_recipe', methods=['POST'])
 def save_paik_recipe():
@@ -108,25 +106,35 @@ def save_paik_recipe():
     url_receive = request.form['url_give']
     # 사용자가 저장한 레시피의 url 파라미터를 'paik_all_recipes' db에서 조회한 후 카테고리 값 뽑기
     paik_recipes_info = db.paik_all_recipes.find_one({'url': url_receive}, {'_id': 0})['category']
-    print(paik_recipes_info)
+    # print(paik_recipes_info)
+    exist_follow_url = db.save_paik_follow.find({'url': url_receive}, {'_id': 0})
+    exist_official_url = db.save_paik_official.find({'url': url_receive}, {'_id': 0})
+    print(exist_official_url)
 
     if paik_recipes_info == '따라하기레시피':
-        db.save_paik_follow.insert_one({
-            'email': email_receive,
-            'url': url_receive,
-        })
+        if len(exist_follow_url) > 0:
+            # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
+            return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
+        else :
+            db.save_paik_follow.insert_one({
+                'email': email_receive,
+                'url': url_receive,
+            })
     else:
-        db.save_paik_official.insert_one({
-            'email': email_receive,
-            'url': url_receive,
-        })
+        if len(exist_official_url) > 0:
+            # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
+            return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
+        else:
+            db.save_paik_official.insert_one({
+                'email': email_receive,
+                'url': url_receive,
+            })
+
     # '공식레시피'이면 'save_paik_official' db에 저장되고, '따라하기레시피'이면 'save_paik_follow' db에 저장
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!! 코드리뷰  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # !!!!!!! 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 말기 !!!!!!!!
     return jsonify({'result': 'success'})
 
 
-# Developer 문세
+# Developer 조원행
 @app.route('/save_soomi_recipe', methods=['POST'])
 def save_soomi_recipe():
     # 클라이언트로부터 데이터를 받는 부분
@@ -134,21 +142,30 @@ def save_soomi_recipe():
     url_receive = request.form['url_give']
     # 사용자가 저장한 레시피의 url 파라미터를 'paik_all_recipes' db에서 조회한 후 카테고리 값 뽑기
     soomi_recipes_info = db.soomi_all_recipes.find_one({'url': url_receive}, {'_id': 0})['category']
-    print(soomi_recipes_info)
+    # print(soomi_recipes_info)
+    exist_follow_url = db.save_soomi_follow.find({'url': url_receive})
+    exist_official_url = db.save_soomi_official.find({'url': url_receive})
 
     if soomi_recipes_info == '따라하기레시피' :
-        db.save_soomi_follow.insert_one({
-            'email': email_receive,
-            'url': url_receive,
-        })
+        if len(exist_follow_url) > 0:
+            # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
+            return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
+        else :
+            db.save_soomi_follow.insert_one({
+                'email': email_receive,
+                'url': url_receive,
+            })
     else:
-        db.save_soomi_official.insert_one({
-            'email': email_receive,
-            'url': url_receive,
-        })
-    # '공식레시피'이면 'save_paik_official' db에 저장되고, '따라하기레시피'이면 'save_paik_follow' db에 저장
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!! 코드리뷰  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # !!!!!!! 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 말기 !!!!!!!!
+        if len(exist_official_url) > 0:
+            # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
+            return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
+        else :
+            db.save_soomi_official.insert_one({
+                'email': email_receive,
+                'url': url_receive,
+            })
+
+    # '공식레시피'이면 'save_soomi_official' db에 저장되고, '따라하기레시피'이면 'save_soomi_follow' db에 저장
     return jsonify({'result': 'success'})
 
 

@@ -14,9 +14,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 	    $(document).ready(function(){
-	      $('#paik_official').html('');
-	      $('#paik_follow').html('');
-	      listing();
+			$('#paik_official').html('');
+			$('#paik_follow').html('');
+			listing();
 	    });
 
 	    function listing() {
@@ -97,6 +97,53 @@
 			}
 		}
 
+		function recipe_search(){
+			let recipe = $('#recipe_input').val();			
+
+			if(recipe ==''){
+		        alert('레시피를 입력해주세요!');
+		        $('#posting-email').focus();
+		        return false;
+ 	        }
+ 	        
+ 	        $('#paik_official').html('');
+			$('#paik_follow').html('');
+
+			$.ajax({
+				type: "GET",
+				url: "/search_paik_follow?title_give=" + recipe,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let follow_recipe_info = response['follow_recipe_info'];
+			            console.log(follow_recipe_info);
+			            for (let i = 0; i < follow_recipe_info.length; i++) {
+			               paik_follow_recipe_list(follow_recipe_info[i]['image'],follow_recipe_info[i]['title'],follow_recipe_info[i]['posting_day'],follow_recipe_info[i]['description'],follow_recipe_info[i]['author'],follow_recipe_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
+				}
+			})
+
+			$.ajax({
+				type: "GET",
+				url: "/search_paik_official?title_give=" + recipe,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let official_recipe_info = response['official_recipe_info'];
+			            console.log(official_recipe_info);
+			            for (let i = 0; i < official_recipe_info.length; i++) {
+			               paik_official_recipe_list(official_recipe_info[i]['image'],official_recipe_info[i]['title'],official_recipe_info[i]['posting_day'],official_recipe_info[i]['description'],official_recipe_info[i]['author'],official_recipe_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
+				}
+			})
+		}
+
 		function recipe_save(){
 			// 읽기
 			let email = $('#posting-email').val();			
@@ -121,7 +168,7 @@
 						alert('레시피 저장 성공!');
 						window.location.reload();
 					} else {
-						alert('서버 오류!')
+						alert('이미 저장된 레시피입니다! 레시피를 조회 해보세요.')
 					}
 				}
 			})
@@ -177,6 +224,12 @@
 </head>
 <body>
 	<div class="wrap">
+		<div class="myrecipes_view_container">
+			<h1>레시피 검색</h1>
+			<input type="text" id="recipe_input" placeholder="레시피를 입력해주세요.">
+			<button onclick="recipe_search()">레시피 검색</button>
+		</div>
+		<hr/>
 		<div class="recipes_save_container">
 			<h1>레시피 담기</h1>
 			<input type="text" id="posting-email" placeholder="email">
