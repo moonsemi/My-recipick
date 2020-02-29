@@ -36,6 +36,8 @@ def follow_recipes_view():
 # Developer 조원행
 # 김수미 공식레시피 API
 @app.route('/s_official_recipes', methods=['GET'])
+def official_recipes_view():
+
 def s_official_recipes_view():
     # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
     soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
@@ -210,6 +212,46 @@ def myrecipes_follow_view():
 
     return jsonify({'result': 'success', 'myrecipes_follow_info': list_myrecipes_follow_info})
 
+
+# Developer 조원행
+@app.route('/s_myrecipes_official_view', methods=['GET'])
+def s_myrecipes_official_view():
+    # email_give로 클라이언트가 준 email을 가져오기
+    email_receive = request.args.get('email_give')
+    # print(email_receive)
+    # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
+    myrecipes_official_user_info = list(db.save_paik_official.find({'email': email_receive}, {'_id': 0}))
+    # print(myrecipes_official_user_info)
+    s_list_myrecipes_official_info = []
+    for user_email in myrecipes_official_user_info:
+        # print(user_email)
+        target_url = user_email['url']
+        # print(target_url)
+        myrecipes_official_infos = db.paik_all_recipes.find_one({'url': target_url}, {'_id': 0})
+        s_list_myrecipes_official_info.append(myrecipes_official_infos)
+        # print(list_myrecipes_official_info)
+
+    return jsonify({'result': 'success', 's_myrecipes_official_info': s_list_myrecipes_official_info})
+
+
+@app.route('/s_myrecipes_follow_view', methods=['GET'])
+def s_myrecipes_follow_view():
+    # email_give로 클라이언트가 준 email을 가져오기
+    email_receive = request.args.get('email_give')
+    # print(email_receive)
+    # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
+    myrecipes_follow_user_info = list(db.save_paik_follow.find({'email': email_receive}, {'_id': 0}))
+    # print(myrecipes_official_user_info)
+    s_list_myrecipes_follow_info = []
+    for user_email in myrecipes_follow_user_info:
+        # print(user_email)
+        target_url = user_email['url']
+        # print(target_url)
+        myrecipes_follow_user_infos = db.paik_all_recipes.find_one({'url': target_url}, {'_id': 0})
+        s_list_myrecipes_follow_info.append(myrecipes_follow_user_infos)
+        # print(list_myrecipes_follow_info)
+
+    return jsonify({'result': 'success', 's_myrecipes_follow_info': s_list_myrecipes_follow_info})
 
 
 ##################################### 레시피 랜덤 뿌리기 API #####################################

@@ -55,7 +55,45 @@
 	          }
 	        }
 	      })
-	    }
+	    
+
+
+        //ajax 코드 - soomis_official_recipes
+        $.ajax({
+          type: "GET",
+          url: "/s_official_recipes",
+          data: {},
+          success: function(response){
+            if (response['result'] == 'success') {
+              let soomis_official = response['soomis_official'];
+              console.log(soomis_official);
+              for (let i = 0; i < soomis_official.length; i++) {
+                soomis_official_recipes_list(soomis_official[i]['image'], soomis_official[i]['title'], soomis_official[i]['posting_day'], soomis_official[i]['description'], soomis_official[i]['author'], soomis_official[i]['url'])
+              }
+            } else {
+              alert('레시피를 받아오지 못했습니다');
+            }
+          }
+        })
+
+          //ajax 코드 - soomis_follow_recipes
+          $.ajax({
+            type: "GET",
+            url: "/s_follow_recipes",
+            data: {},
+            success: function(response){
+              if (response['result'] == 'success') {
+                let soomis_follow = response['soomis_follow'];
+                console.log(soomis_follow);
+                for (let i = 0; i < soomis_follow.length; i++) {
+                  soomis_follow_recipes_list(soomis_follow[i]['image'], soomis_follow[i]['title'], soomis_follow[i]['posting_day'], soomis_follow[i]['description'], soomis_follow[i]['author'], soomis_follow[i]['url'])
+                } 
+              } else {
+                alert('레시피를 받아오지 못했습니다');
+              }
+            }
+          })
+      }
 
 		function paik_official_recipe_list(image,title,posting_day,description,author,url) {
 	      	let card_tamp = '<div class="card">\
@@ -86,6 +124,38 @@
 	      				</div>';
 						$('#paik_follow').append(card_tamp);
 	    }	
+
+
+	    function soomis_official_recipes_list(image, title, posting_day, description, author, url) {
+        let temp_html = '<div class="card">\
+		                 <img class="card-img-top" src= "'+image+'" alt="Card image cap">\
+			              <div class="card-body">\
+			                  <h5 class="card-title">'+title+'</h5>\
+			                  <p class="card-text">'+posting_day+'</p>\
+			                  <p class="card-text">'+description+'</p>\
+			                  <p class="card-text">'+author+'</p>\
+			                  <a href="'+url+'" class="btn btn-primary" id="url_recipe" target="_blank">레시피 보기</a>\
+			                  <a href="'+url+'" onclick="copy_trackback(this.href); return false;">url 저장</a>\
+			              </div>\
+		                </div>';
+	                $('#soomi_official').append(temp_html);
+      }
+
+      function soomis_follow_recipes_list(image, title, posting_day, description, author, url) {
+        let temp_html = '<div class="card" >\
+		                  <img class="card-img-top" src= "'+image+'" alt="Card image cap">\
+			              <div class="card-body">\
+			                  <h5 class="card-title">'+title+'</h5>\
+			                  <p class="card-text">'+posting_day+'</p>\
+			                  <p class="card-text">'+description+'</p>\
+			                  <p class="card-text">'+author+'</p>\
+			                  <a href="'+url+'" class="btn btn-primary" id="url_recipe" target="_blank">레시피 보기</a>\
+			                  <a href="'+url+'" onclick="copy_trackback(this.href); return false;">url 저장</a>\
+			              </div>\
+		                </div>';
+
+		        $('#soomi_follow').append(temp_html);
+      }
 
 	    function copy_trackback(trb) {
 			var IE=(document.all)?true:false;
@@ -172,6 +242,20 @@
 					}
 				}
 			})
+
+			$.ajax({
+		        type: "POST", // POST 방식으로 요청하겠다.
+		        url: "/save_soomi_recipe", // /post라는 url에 요청하겠다.
+		        data: { url_give: url, email_give: email }, // 데이터를 주는 방법
+		        success: function(response){ // 성공하면
+		          if (response['result'] == 'success') {
+		            alert('레시피 저장 성공!');
+		            window.location.reload();
+		          } else {
+		            alert('서버 오류!')
+		          }
+		        }
+		     })
 		}
 
 		function myrecipes_paik_view(){
@@ -203,6 +287,7 @@
 				}
 			})
 
+
 			$.ajax({
 				type: "GET",
 				url: "/myrecipes_follow_view?email_give=" + email,
@@ -219,6 +304,54 @@
 			        }
 				}
 			})
+		}
+
+
+		function myrecipes_soomi_view(){
+			let email = $('#user_email').val();		
+			if(email ==''){
+		        alert('이메일을 입력해주세요!');
+		        $('#user_email').focus();
+		        return false;
+	        }
+
+	        $('#soomi_official').html('');
+	        $('#soomi_follow').html('');
+
+			// 나의레시피중 김수미만 
+			$.ajax({
+			    type: "GET",
+			    url: "/s_myrecipes_official_view?email_give=" + email,
+			    data: {}, 
+			    success: function(response){
+			      if (response['result'] == 'success') {
+			        let s_myrecipes_official_info = response['s_myrecipes_official_info'];
+			        console.log(s_myrecipes_official_info);
+			        for (let i = 0; i < s_myrecipes_official_info.length; i++) {
+			          soomis_official_recipes_list(s_myrecipes_official_info[i]['image'],s_myrecipes_official_info[i]['title'],s_myrecipes_official_info[i]['posting_day'],s_myrecipes_official_info[i]['description'],s_myrecipes_official_info[i]['author'],s_myrecipes_official_info[i]['url'])
+			        }
+			     } else {
+			      alert('레시피를 받아오지 못했습니다');
+			    }
+			  }
+			})  
+
+			$.ajax({
+			    type: "GET",
+			    url: "/s_myrecipes_follow_view?email_give=" + email,
+			    data: {}, 
+			    success: function(response){
+			      if (response['result'] == 'success') {
+			        let s_myrecipes_follow_info = response['s_myrecipes_follow_info'];
+			        console.log(s_myrecipes_follow_info);
+			        for (let i = 0; i < s_myrecipes_follow_info.length; i++) {
+			         soomis_follow_recipes_list(s_myrecipes_follow_info[i]['image'],s_myrecipes_follow_info[i]['title'],s_myrecipes_follow_info[i]['posting_day'],s_myrecipes_follow_info[i]['description'],s_myrecipes_follow_info[i]['author'],s_myrecipes_follow_info[i]['url'])
+			       }
+			     } else {
+			      alert('레시피를 받아오지 못했습니다');
+			    }
+			  }
+			})    
 		}
 	</script>
 </head>
@@ -241,6 +374,7 @@
 			<h1>내가 담은 레시피가 보고싶다면?</h1>
 			<input type="text" id="user_email" placeholder="email">
 			<button onclick="myrecipes_paik_view()">나의레시피 보기</button>
+			<button onclick="myrecipes_soomi_view()">나의 수미 레시피 보기</button>
 		</div>
 		<hr/>
 		<div class="paik_recipe_container">
@@ -317,6 +451,37 @@
 							<p class="card-text">토방이네는 지금......</p>
 							<a href="#" class="btn btn-primary">레시피 보기</a>
 							<button type="button" class="btn btn-dark">url 저장</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 김수미 레피시 출력 -->
+			<div class="paik_official_recipe_area">
+				<h1>[김수미 공식레시피]</h1>
+				<div class="card-columns" id="soomi_official">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="" alt="ard image cap">
+						<div class="card-body">
+							<h5 class="card-title">오징어초무침&밀푀유전골&해초무침3종세트</h5>
+							<p class="card-text">2020.01.31.</p>
+							<p class="card-text">수미네반찬 공식 레시피</p>
+							<p class="card-text">하이! 미세스뽀</p>
+							<a href="#" class="btn btn-primary">레시피 보기</a>
+							<button type="button" class="btn btn-dark">url 저장</button>
+						</div>
+					</div>
+					<h1>[김수미 따라하기레시피]</h1>
+					<div class="card-columns" id="soomi_follow">
+						<div class="card" style="width: 18rem;">
+							<img class="card-img-top" src="" alt="ard image cap">
+							<div class="card-body">
+								<h5 class="card-title">수미네반찬 전찌개 황금레시피</h5>
+								<p class="card-text">2020.01.30.</p>
+								<p class="card-text">설날이 지나면 늘 남는 전들 계속해서 먹으려니 속도 느끼한것 같고이 많은 전들을 언제 다 해치우나 생각만 들기도해요수미네반찬을 보니 국물을 정말 얼큰하게 내는전찌개를 만드는걸 보고 따라서 만들어봤는데정말...</p>
+								<p class="card-text">따라하기 레시피</p>
+								<a href="#" class="btn btn-primary">레시피 보기</a>
+								<button type="button" class="btn btn-dark">url 저장</button>
+							</div>
 						</div>
 					</div>
 				</div>
