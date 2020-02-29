@@ -107,12 +107,13 @@ def save_paik_recipe():
     # 사용자가 저장한 레시피의 url 파라미터를 'paik_all_recipes' db에서 조회한 후 카테고리 값 뽑기
     paik_recipes_info = db.paik_all_recipes.find_one({'url': url_receive}, {'_id': 0})['category']
     # print(paik_recipes_info)
-    exist_follow_url = db.save_paik_follow.find({'url': url_receive}, {'_id': 0})
-    exist_official_url = db.save_paik_official.find({'url': url_receive}, {'_id': 0})
-    print(exist_official_url)
+    exist_follow_url = db.save_paik_follow.find_one({'url': url_receive})
+    # print(exist_follow_url)
+    exist_official_url = db.save_paik_official.find_one({'url': url_receive})
+    # print(exist_official_url)
 
     if paik_recipes_info == '따라하기레시피':
-        if len(exist_follow_url) > 0:
+        if exist_follow_url != None:
             # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
             return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
         else :
@@ -121,7 +122,7 @@ def save_paik_recipe():
                 'url': url_receive,
             })
     else:
-        if len(exist_official_url) > 0:
+        if exist_official_url != None:
             # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
             return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
         else:
@@ -147,7 +148,7 @@ def save_soomi_recipe():
     exist_official_url = db.save_soomi_official.find({'url': url_receive})
 
     if soomi_recipes_info == '따라하기레시피' :
-        if len(exist_follow_url) > 0:
+        if exist_follow_url != None:
             # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
             return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
         else :
@@ -156,7 +157,7 @@ def save_soomi_recipe():
                 'url': url_receive,
             })
     else:
-        if len(exist_official_url) > 0:
+        if exist_official_url != None:
             # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
             return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
         else :
