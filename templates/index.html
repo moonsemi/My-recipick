@@ -14,10 +14,15 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 	    $(document).ready(function(){
-			$('#paik_official').html('');
-			$('#paik_follow').html('');
-			listing();
+
+	      $('#paik_official').html('');
+	      $('#paik_follow').html('');
+	      $('#soomi_official').html('');
+	      $('#soomi_follow').html('');
+	      listing();
+
 	    });
+	    // # commit & push retry
 
 	    function listing() {
 	      // ajax 코드 - paik_official_recipes
@@ -93,7 +98,31 @@
               }
             }
           })
+          // 랜덤출력 
+          $.ajax({
+	        type: "GET",
+	        url: "/random_official_recipes",
+	        data: {},
+	        success: function(response){
+	         if (response['result'] == 'success') {
+	           let recommend_recipes = response['recommend_recipes'];
+	           console.log(recommend_recipes);
+	           for (let i = 0; i < recommend_recipes.length; i++) {
+	            random_show_recipes(recommend_recipes[i]['title'])
+	          } 
+	          // window.location.reload(); //무한반복 
+	        } else {
+	          alert('레시피를 받아오지 못했습니다');
+	        }
+	      }
+	    })
       }
+
+      	// 랜덤출력 
+	      function random_show_recipes(title) {
+		      let temp_html = '<li>'+title+'</li>'
+		      	$('#show_all_recipe').append(temp_html);
+		    }
 
 		function paik_official_recipe_list(image,title,posting_day,description,author,url) {
 	      	let card_tamp = '<div class="card">\
@@ -375,6 +404,15 @@
 			<input type="text" id="user_email" placeholder="email">
 			<button onclick="myrecipes_paik_view()">나의레시피 보기</button>
 			<button onclick="myrecipes_soomi_view()">나의 수미 레시피 보기</button>
+		</div>
+		<hr/>
+		<!-- 추천 레시피_랜덤출력 -->
+		<div class="recipes_save_container">
+			<h1>추천레시피!</h1>
+			<div  id="show_all_recipe">
+				<ol>
+				</ol>
+			</div>
 		</div>
 		<hr/>
 		<div class="paik_recipe_container">
