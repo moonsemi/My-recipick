@@ -36,8 +36,6 @@ def follow_recipes_view():
 # Developer 조원행
 # 김수미 공식레시피 API
 @app.route('/s_official_recipes', methods=['GET'])
-def official_recipes_view():
-
 def s_official_recipes_view():
     # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
     soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
@@ -256,8 +254,8 @@ def s_myrecipes_follow_view():
 
 
 ##################################### 레시피 랜덤 뿌리기 API #####################################
-#Developer 조원행
-#김수미 레시피 title 랜덤으로 뿌리기
+# Developer 조원행
+# 김수미 레시피 title 랜덤으로 뿌리기
 @app.route('/paik_rand_follow_recipes', methods=['GET'])
 def random_recipes():
     # paik_all_recipes 10번 돌면서 recipe 축적
