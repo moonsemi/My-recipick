@@ -261,6 +261,7 @@ def s_myrecipes_follow_view():
 def random_recipes():
     # paik_all_recipes 10번 돌면서 recipe 축적
     for repeat in range(10):
+
         # 백종원의 공식 레시피 400개에서 title만 꺼내온다
         # random_recipe = list(db.paik_all_recipes.find({'category': '공식레시피'}, {'_id': 0}))
 
@@ -270,7 +271,8 @@ def random_recipes():
 
     return jsonify({'result': 'success', 'recommend_recipes': random_official_recipes})
 
-
+# commit & push retry
+#test commit
 
 if __name__ == '__main__':
     app.run('localhost', port=9980, debug=True)
