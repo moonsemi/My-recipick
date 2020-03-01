@@ -11,18 +11,18 @@ driver = webdriver.Chrome(r'C:\Users\문세미\Downloads\chromedriver_win32/chro
 
 
 driver.get('https://post.naver.com/search/post.nhn?keyword=%EB%B0%B1%EC%A2%85%EC%9B%90+%EB%A7%8C%EB%93%A4%EA%B8%B0')
-for page_num in range(1,11) :
-    # '더보기'버튼 2 클릭
+for page_num in range(1,31) :
+    # '더보기'버튼 30번 클릭
     # more_btn > button
     # // *[ @ id = "more_btn"] / button
     btn = driver.find_element_by_xpath('//*[@id="more_btn"]/button')
     btn.click()
     # 로딩 시간이 있으므로 타이밍 맞추기 위해 사용
-    driver.implicitly_wait(3)
+    driver.implicitly_wait(10)
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-paik_follow_recipes = soup.select('#el_list_container > ul > li')
+paik_follow_recipes = soup.select('#_list_container > ul > li')
 
 #  insert 할 데이터 셋트를 만듦
 paik_follow_recipe_doc = {
@@ -34,22 +34,33 @@ paik_follow_recipe_doc = {
     'author': '',
     'url': ''
 }
-
+# 109개 밖에 저장이 안되어있음 / 만개의 레시피 등 이미지 arrts없는 것들
+# AttributeError: 'NoneType' object has no attribute 'attrs'
 for paik_follow_recipe in paik_follow_recipes:
-    image = paik_follow_recipe.select_one('div > div.feed_body > div.image_area > a > img').attrs['src']
+    author = paik_follow_recipe.select_one('div > div.feed_head > div > div.writer_area > p > span.name > a').text
+    if author == '집밥백선생':
+        continue
+    if author == 'wozm2368':
+        continue
+    if author == '만개의레시피':
+        continue
+    print(author)
+    no_img = paik_follow_recipe.select_one('div > div.feed_body > div.image_area > a > img').attrs
+    if no_img != None :
+        image = paik_follow_recipe.select_one('div > div.feed_body > div.image_area > a > img').attrs['src']
     print(image)
     category = '따라하기레시피'
     print(category)
     title = paik_follow_recipe.select_one('div > div.feed_body > div.text_area > a.link_end > strong').text.strip()
+    if title == ' 레시피 모음 best5! 깨알팁만 모아봤어유':
+        continue
+    if title == '주말, 맛있는 백종원 집반찬 만들기':
+        continue
     print(title)
     posting_day = paik_follow_recipe.select_one('div > div.feed_head > div > div.info_post > time').text.strip()
     print(posting_day)
     description = paik_follow_recipe.select_one('div > div.feed_body > div.text_area > a.link_end > p').text
     print(description)
-    author = paik_follow_recipe.select_one('div > div.feed_head > div > div.writer_area > p > span.name > a').text
-    # if author ==  '집밥백선생' :
-    #     continue
-    print(author)
     pre_url = paik_follow_recipe.select_one('div > div.feed_body > div.text_area > a.link_end').get('href')
     url = 'https://post.naver.com/' + pre_url
     print(url)
