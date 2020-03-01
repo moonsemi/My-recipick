@@ -16,6 +16,8 @@
 	    $(document).ready(function(){
 			$('#paik_official').html('');
 			$('#paik_follow').html('');
+			$('#soomi_official').html('');
+			$('#soomi_follow').html('');
 			listing();
 	    });
 
@@ -93,6 +95,25 @@
               }
             }
           })
+
+          // ajax 코드 - 랜덤 출력(기준 paik_official_recipes)
+          $.ajax({
+          	type: "GET",
+          	url: "/paik_rand_official_recipes",
+          	data: {},
+          	success: function(response){
+          		if (response['result'] == 'success') {
+          			let recommend_recipes = response['recommend_recipes'];
+          			console.log(recommend_recipes);
+          			for (let i = 0; i < recommend_recipes.length; i++) {
+          				soomi_show_recipes(recommend_recipes[i]['title'])
+          			} 
+          // window.location.reload(); //무한반복 
+			      } else {
+			      	alert('추천 레시피를 받아오지 못했습니다');
+			      }
+			  }
+			})
       }
 
 		function paik_official_recipe_list(image,title,posting_day,description,author,url) {
@@ -156,6 +177,11 @@
 
 		        $('#soomi_follow').append(temp_html);
       }
+
+        function soomi_show_recipes(title) {
+	      let temp_html = '<li>'+title+'</li>'
+		      $('#show_all_recipe').append(temp_html);
+		    }
 
 	    function copy_trackback(trb) {
 			var IE=(document.all)?true:false;
@@ -377,6 +403,14 @@
 			<button onclick="myrecipes_soomi_view()">나의 수미 레시피 보기</button>
 		</div>
 		<hr/>
+		<div class="recipes_save_container">
+		      <h1>추천레시피!</h1>
+		      <div  id="show_all_recipe">
+		        <ol>
+		        </ol>
+		      </div>
+		    </div>
+		<hr/>
 		<div class="paik_recipe_container">
 			<div class="paik_official_recipe_area">
 				<h1>[백종원 공식레시피]</h1>
@@ -486,7 +520,7 @@
 					</div>
 				</div>
 			</div>
-		<div>
+		</div>
 	</div>
 </body>
 </html>
