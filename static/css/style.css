@@ -1,0 +1,240 @@
+/* !!! reset.css!!! */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li, fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption,footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video{ margin:0; padding:0;}
+body{
+    width: 100%; 
+    color: #333333;
+    overflow-x: hidden; 
+    word-break: break-all;
+    -ms-word-break: break-all;
+}
+img, fieldset, iframe {border:none; outline:none;}
+form, fieldset, iframe{display:block;border:0}
+img{ vertical-align:middle; border:none; max-width:100%;}
+a , a:hover , a[href*="callto"]:hover, a[href*="mailto"]:hover{text-decoration:none;color:#333333;}
+ol,ul,li {list-style:none;}
+i, em, address {font-style: normal;}
+table{table-layout: fixed; width:100%;}
+table, tbody, thead, tr, td, th {border-collapse: collapse; border-spacing: 0; }
+input, select, button {
+    border: none;
+    outline: none;
+    background: transparent;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;    
+}
+input{
+    display: inline-block;
+    padding-left: 13px;
+}
+.clearfix:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+input[type=text]::-ms-clear {display: none;}
+select::-ms-expand{display:none;}
+input:focus, select:focus, button:focus, textarea:focus {outline: none; }
+input[type="checkbox"], input[type="radio"] {width: auto; height: auto; }
+input[type="button"], input[type="file"], input[type="checkbox"], input[type="radio"]{cursor: pointer;}
+button{cursor: pointer; padding: 0; margin: 0;}
+label, select{cursor: pointer;}
+/* placeholder */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */ color:#cccccc; font-family: NanumSquare;}
+::-moz-placeholder { /* Firefox 19+ */ color:#cccccc; font-family: NanumSquare;}
+:-ms-input-placeholder { /* IE 10+ */ color:#cccccc; font-family: NanumSquare;}
+:-moz-placeholder { /* Firefox 18- */ color:#cccccc; font-family: NanumSquare;}
+:focus::-webkit-input-placeholder { /* Chrome/Opera/Safari */ opacity:1;}
+:focus::-moz-placeholder { /* Firefox 19+ */ opacity:1;}
+:focus:-ms-input-placeholder { /* IE 10+ */ opacity:1;}
+:focus:-moz-placeholder { /* Firefox 18- */ opacity:1;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+/* general custom */
+.hidden {position: absolute; top: 0; left: -9999em; font-size:0;}
+
+
+/* !!! my css!!! */
+body{
+    overflow-y: hidden;
+    color: #333333;
+}
+h2{
+    font-size: 22px;
+}
+input{
+    display: inline-block;
+    padding-left: 13px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.wrap > div{			
+    padding: 20px 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.l-side{
+    position: fixed;
+    width: 15%; height: 100vh;
+}
+.recipes_search_container{
+    position: relative;
+    margin: 40px 0 80px 0;
+}
+.recipes_search_container input{
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #bbbbbb;
+}
+.recipes_search_container button{
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    transform: translateY(-50%);
+}
+
+.c-side{
+    float: left;
+    width: 70%;
+    margin-left: 15%;
+    border-left: 1px solid #d24400;
+    border-right: 1px solid #d24400;
+}
+.tabs li{
+    float: left; 
+    width: calc(50%); line-height: 40px;
+    border: 1px solid #bbbbbb;
+    text-align: center;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.tabs li.active{
+    background: #d24400;
+}
+.tabs li.active a{
+    color: #ffffff;
+}
+.paik_recipe_container > div, .soomi_recipe_container > div{
+    float: left;
+    width: 50%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.tab-content .paik_recipe_container > div h3, .tab-content .soomi_recipe_container > div h3{
+    margin-top: 20px;
+}
+.tab-content .paik_recipe_container .paik_follow_recipe_area{
+    border-left: 1px solid #dddddd;
+}
+.tab-content .card{
+    float: left;
+    width: calc(50% - 7px);
+    margin-right: 10px; margin-top: 10px;
+    border: 1px solid #bbbbbb;
+    border-radius: 6px;
+}
+.tab-content .card:nth-child(2n){
+    margin-right: 0;
+}
+.paik_recipe_container .card-columns{
+    height: 790px;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+       scrollbar-width: none; /* Firefox */
+}
+.paik_recipe_container .card-columns::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+.card .card-body{
+    margin: 20px;
+}
+.card .card-body .card-title{
+    margin-bottom: 20px;
+}
+.card .card-body .card-text{
+    margin-bottom: 20px;
+}
+.card .card-body .view-btn{
+    display: inline-block;
+    line-height: 35px; padding: 0 10px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    background: #eeeeee; 
+    transition: all 0.4s;
+}
+.card .card-body .view-btn:hover{
+    border: 1px solid #d24400;
+    background: #d24400; color:#ffffff;
+}
+.card .card-body .copy-btn{
+    margin-left: 10px;
+    transition: all 0.2s;
+}
+.card .card-body .copy-btn:hover{
+    color: #d24400;
+}
+
+.r-side{
+    position: fixed; right: 0;
+    width: 15%; height: 100vh;
+}
+.recipes_save_container{
+    margin-bottom: 80px;
+}
+.recipes_save_container h2{
+    margin-bottom: 20px;
+}
+.recipes_save_container input{
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #bbbbbb;
+}
+.recipes_save_container #posting-url{
+    margin-top: 7px;
+}
+.recipes_save_container .save-btn{
+    width: 100%; line-height: 35px;
+    padding: 0 10px; margin-top: 15px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    background: #eeeeee;
+    transition: all 0.4s;
+}
+.myrecipes_view_container h2{
+    margin-bottom: 20px;
+}
+.myrecipes_view_container input{
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid #bbbbbb;
+}
+.myrecipes_view_container .myrecipe-view-btn{
+    width: 100%; line-height: 35px;
+    padding: 0 10px; margin-top: 15px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    background: #eeeeee;
+    transition: all 0.4s;
+}
+
+.quickmenu{
+    display: none;
+    position: fixed;
+    bottom: 30px; right: calc(100%/19);
+    z-index: 1;									
+}
+.quickmenu .totop-btn{			
+    width: 60px; height: 60px;
+    opacity: 0.8;			
+}
+.quickmenu .gohome-btn{
+    width: 60px; height: 60px;
+    margin-top: 9px;
+    opacity: 0.8;			
+}	
