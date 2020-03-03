@@ -1,16 +1,13 @@
-# 수정금지
-import time
-
 from selenium import webdriver
-# from selenium import webdriver as wd
 from bs4 import BeautifulSoup
-
-from pymongo import MongoClient  # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+from pymongo import MongoClient
+import time
 
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.dbsparta  # 'dbsparta'라는 이름의 db를 만듭니다.
 
-driver = webdriver.Chrome('/Users/cho/Downloads/chromedriver')
+# driver = webdriver.Chrome('C:\Users\문세미\Desktop\sparta\python_project_test\venv\Scripts\python.exe') #세미's webdriver 경로
+driver = webdriver.Chrome('/Users/cho/Downloads/chromedriver') #원행's webdriver 경로
 # 크롬을 연다. (★chromedriver.exe 의 경로를 제대로 설정해주는 것이 중요함)
 
 
@@ -18,14 +15,13 @@ url = 'https://post.naver.com/my/series/detail.nhn?seriesNo=472832&memberNo=3669
 driver.get(url)
 
 SCROLL_PAUSE_TIME = 0.5
-cnt_up = 1
 # Get scroll height
 last_height = driver.execute_script("return document.body.scrollHeight")
 for cnt in range(1, 4):
 	driver.find_element_by_xpath('//*[@id="more_btn"]/button').click()
+
 	# btn 클릭후 스크롤 하단으로 내리기 반복
 	while True:
-
 		# Scroll down to bottom
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -51,10 +47,21 @@ for soomis_official_recipe in soomis_official_recipes:
 		'url': url
 	}
 	print(cnt_up)
-	# &가 없는 title이 있어서 인데스를 설정하면 에러가 발생
+
+	# 레시피와 관련없는 post 제외
 	title = soomis_official_recipe.select_one('div.spot_post_name').text.strip()
+	if title == "바로, 오늘! 수미네 괌특집 2탄 공개방송 현장을 공개합니다!":
+		continue
+	if title == "[오늘] 9월 5일 (수) '수미네' 방송 안내":
+		continue
+	if title == "<수미네 반찬> 레시피북 예약판매 소식":
+		continue
+	if title == "'수미네' 스승의 날 특집":
+		continue
+	if title == "'수미네' 어버이날 특집":
+		continue
 	print(title)
-	#
+
 
 	image = str(soomis_official_recipe.select_one('img').attrs['src'])
 	print(image)
@@ -62,17 +69,16 @@ for soomis_official_recipe in soomis_official_recipes:
 
 	category = '공식레시피'
 	print(category)
-	#
+
 	posting_day = str(soomis_official_recipe.select_one('a > p').text.split()[0])
 	print(posting_day)
 
-	#
 	description = '수미네반찬 공식 레시피'
 	print(description)
 
 	author = '수미네반찬 블로그'
 	print(author)
-	#
+
 	pre_url = soomis_official_recipe.select_one('a.spot_post_area').get('href')
 	url = 'https://post.naver.com' + pre_url
 	print(url)
@@ -88,8 +94,6 @@ for soomis_official_recipe in soomis_official_recipes:
 		'url': url
 	}
 
-	# 	continue
-	cnt_up += 1
 
 
         #db에 뽑은 data 저장
