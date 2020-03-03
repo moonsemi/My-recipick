@@ -140,7 +140,7 @@
 							let recommend_recipes = response['recommend_recipes'];
 							console.log(recommend_recipes);
 							for (let i = 0; i < recommend_recipes.length; i++) {
-							random_show_recipes(recommend_recipes[i]['title'])
+							random_show_recipes(recommend_recipes[i]['title'], recommend_recipes[i]['url'])
 						} 
 						// window.location.reload(); //무한반복 
 						} else {
@@ -216,9 +216,9 @@
      	}
 
       	// Developer 조원행 - 레시피 랜덤출력 listing
-      	function random_show_recipes(title) {
+      	function random_show_recipes(title, url) {
 		    let temp_html = '<ol>\
-		    					<li>'+title+'</li>\
+		    					<a href="'+url+'"><li>'+title+'</li></a>\
 							</ol>'
 	      	$('#show_all_recipe').append(temp_html);
 	    }
