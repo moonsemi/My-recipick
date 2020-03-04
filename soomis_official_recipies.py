@@ -6,7 +6,6 @@ import time
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.dbsparta  # 'dbsparta'라는 이름의 db를 만듭니다.
 
-# driver = webdriver.Chrome('C:\Users\문세미\Desktop\sparta\python_project_test\venv\Scripts\python.exe') #세미's webdriver 경로
 driver = webdriver.Chrome('/Users/cho/Downloads/chromedriver') #원행's webdriver 경로
 # 크롬을 연다. (★chromedriver.exe 의 경로를 제대로 설정해주는 것이 중요함)
 
@@ -46,7 +45,7 @@ for soomis_official_recipe in soomis_official_recipes:
 		'title': 'title',
 		'url': url
 	}
-	print(cnt_up)
+	# print(cnt_up)
 
 	# 레시피와 관련없는 post 제외
 	title = soomis_official_recipe.select_one('div.spot_post_name').text.strip()
@@ -97,7 +96,8 @@ for soomis_official_recipe in soomis_official_recipes:
 
 
         #db에 뽑은 data 저장
-	# db.soomi_all_recipes.insert_one(soomis_official_recipe_doc) #저장할때만 활성화 시키기
+	db.soomi_all_recipes.insert_one(soomis_official_recipe_doc)
+	# #저장할때만 활성화 시키기
 	# db.soomis_official_recipes.insert_one(soomis_official_recipe_doc)
 driver.close()
 
