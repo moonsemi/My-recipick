@@ -140,7 +140,7 @@
 							let recommend_recipes = response['recommend_recipes'];
 							console.log(recommend_recipes);
 							for (let i = 0; i < recommend_recipes.length; i++) {
-							random_show_recipes(recommend_recipes[i]['title'])
+							random_show_recipes(recommend_recipes[i]['url'], recommend_recipes[i]['title'])
 						} 
 						// window.location.reload(); //무한반복 
 						} else {
@@ -148,7 +148,7 @@
 						}
 				}
 		    })
-      	}
+      	}	
 
 
  		// Developer 문세미 - paik_official 레시피 listing
@@ -214,12 +214,13 @@
 			                </div>';
 		        			$('#soomi_follow').append(temp_html);
      	}
+	
 
       	// Developer 조원행 - 레시피 랜덤출력 listing
-      	function random_show_recipes(title) {
-		    let temp_html = '<ol>\
-		    					<li>'+title+'</li>\
-							</ol>'
+      	function random_show_recipes(url, title) {
+		    let temp_html = '<li>\
+		    <a href="'+url+'">'+title+'</a>\
+		    </li>'
 	      	$('#show_all_recipe').append(temp_html);
 	    }
 
@@ -362,6 +363,7 @@
 			        }
 				}
 			})
+
 
 			// Developer 문세미 - ajax 코드 - paik_follow_recipe_view(조회)
 			$.ajax({
