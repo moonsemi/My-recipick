@@ -21,32 +21,40 @@ def home():
 # 백종원 공식레시피 API
 @app.route('/official_recipes', methods=['GET'])
 def official_recipes_view():
-    # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
-    paik_official = list(db.paik_all_recipes.find({'category': '공식레시피'}, {'_id': 0}))
-    return jsonify({'result': 'success', 'paik_official': paik_official})
+    for repeat in range(1):
+        # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
+        paik_official = list(db.paik_all_recipes.find({'category': '공식레시피'}, {'_id': 0}))
+        paik_official = (random.sample(paik_official, 100))
+        return jsonify({'result': 'success', 'paik_official': paik_official})
 
 # 백종원 따라하기레시피 API
 @app.route('/follow_recipes', methods=['GET'])
 def follow_recipes_view():
-    # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '따라하기레시피' 가져오기
-    paik_follow = list(db.paik_all_recipes.find({'category': '따라하기레시피'}, {'_id': 0}))
-    return jsonify({'result': 'success', 'paik_follow': paik_follow})
+    for repeat in range(1):
+        # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '따라하기레시피' 가져오기
+        paik_follow = list(db.paik_all_recipes.find({'category': '따라하기레시피'}, {'_id': 0}))
+        paik_follow = (random.sample(paik_follow, 100))
+        return jsonify({'result': 'success', 'paik_follow': paik_follow})
 
 
 # Developer 조원행
 # 김수미 공식레시피 API
 @app.route('/s_official_recipes', methods=['GET'])
 def s_official_recipes_view():
-    # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
-    soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
-    return jsonify({'result': 'success', 'soomis_official': soomis_official})
+    for repeat in range(1):
+            # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
+            soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
+            soomis_official = (random.sample(soomis_official, 100))
+            return jsonify({'result': 'success', 'soomis_official': soomis_official})
 
 # 김수미 따라하기레시피 API
 @app.route('/s_follow_recipes', methods=['GET'])
 def s_follow_recipes_view():
-    # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '따라하기레시피' 가져오기
-    soomis_follow = list(db.soomi_all_recipes.find({'category':'따라하기 레시피'}, {'_id': 0}))
-    return jsonify({'result': 'success', 'soomis_follow': soomis_follow})
+    for repeat in range(1):
+        # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '따라하기레시피' 가져오기
+        soomis_follow = list(db.soomi_all_recipes.find({'category':'따라하기 레시피'}, {'_id': 0}))
+        soomis_follow = (random.sample(soomis_follow, 100))
+        return jsonify({'result': 'success', 'soomis_follow': soomis_follow})
 
 
 
