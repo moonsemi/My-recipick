@@ -44,7 +44,7 @@ def s_official_recipes_view():
     for repeat in range(1):
             # 서버 내부에서 수행 할 기능 / DB에 저장돼있는 모든 정보 중 '공식레시피' 가져오기
             soomis_official = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
-            soomis_official = (random.sample(soomis_official, 100))
+            soomis_official = (random.sample(soomis_official, 70))
             return jsonify({'result': 'success', 'soomis_official': soomis_official})
 
 # 김수미 따라하기레시피 API
