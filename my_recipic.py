@@ -271,10 +271,7 @@ def random_recipes():
     for repeat in range(10):
 
         # 백종원의 공식 레시피 400개에서 title만 꺼내온다
-        # random_recipe = list(db.paik_all_recipes.find({'category': '공식레시피'}, {'_id': 0}))
-
-        # 김수의 공식 레시피 400개에서 title만 꺼내온다
-        random_recipe = list(db.soomi_all_recipes.find({'category':'공식레시피'}, {'_id': 0}))
+        random_recipe = list(db.paik_all_recipes.find({'category': '공식레시피'}, {'_id': 0}))
         random_official_recipes = (random.sample(random_recipe, 14)) #max = 80개씩 뿌릴수 있음
 
     return jsonify({'result': 'success', 'recommend_recipes': random_official_recipes})
