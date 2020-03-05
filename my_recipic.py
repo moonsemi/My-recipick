@@ -88,7 +88,7 @@ def search_paik_official_view():
 @app.route('/search_soomi_follow', methods=['GET'])
 def search_soomi_follow_view():
     # title_give로 클라이언트가 준 title을 가져오기
-    title_receive = request.args.get('recipe_title_give')
+    title_receive = request.args.get('title_give')
     # title의 값이 받은 title과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
     soomis_follow_info = list(db.soomi_all_recipes.find({'category':'따라하기 레시피','title':{'$regex':title_receive}}, {'_id': 0}))
     # info라는 키 값으로 해당하는 레시피 데이터 내려주기
@@ -98,7 +98,7 @@ def search_soomi_follow_view():
 @app.route('/search_soomi_official', methods=['GET'])
 def search_soomi_official_view():
     # title_give로 클라이언트가 준 title을 가져오기
-    title_receive = request.args.get('recipe_title_give')
+    title_receive = request.args.get('title_give')
     # title의 값이 받은 title과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
     soomis_official_info = list(db.soomi_all_recipes.find({'category':'공식레시피','title':{'$regex':title_receive}}, {'_id': 0}))
     # info라는 키 값으로 해당하는 레시피 데이터 내려주기
@@ -152,10 +152,10 @@ def save_soomi_recipe():
     # 사용자가 저장한 레시피의 url 파라미터를 'paik_all_recipes' db에서 조회한 후 카테고리 값 뽑기
     soomi_recipes_info = db.soomi_all_recipes.find_one({'url': url_receive}, {'_id': 0})['category']
     # print(soomi_recipes_info)
-    exist_follow_url = db.save_soomi_follow.find({'url': url_receive})
-    exist_official_url = db.save_soomi_official.find({'url': url_receive})
+    exist_follow_url = db.save_soomi_follow.find_one({'url': url_receive})
+    exist_official_url = db.save_soomi_official.find_one({'url': url_receive})
 
-    if soomi_recipes_info == '따라하기레시피' :
+    if soomi_recipes_info == '따라하기 레시피' :
         if exist_follow_url != None:
             # 유저가 저장하려는 레시피가 이미 저장되어 있다면 중복저장하지 않기
             return jsonify({'result': 'fail', 'message': '이미 저장된 레시피입니다! 레시피를 조회 해보세요.'})
@@ -227,14 +227,14 @@ def s_myrecipes_official_view():
     email_receive = request.args.get('email_give')
     # print(email_receive)
     # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
-    myrecipes_official_user_info = list(db.save_paik_official.find({'email': email_receive}, {'_id': 0}))
+    myrecipes_official_user_info = list(db.save_soomi_official.find({'email': email_receive}, {'_id': 0}))
     # print(myrecipes_official_user_info)
     s_list_myrecipes_official_info = []
     for user_email in myrecipes_official_user_info:
         # print(user_email)
         target_url = user_email['url']
         # print(target_url)
-        myrecipes_official_infos = db.paik_all_recipes.find_one({'url': target_url}, {'_id': 0})
+        myrecipes_official_infos = db.soomi_all_recipes.find_one({'url': target_url}, {'_id': 0})
         s_list_myrecipes_official_info.append(myrecipes_official_infos)
         # print(list_myrecipes_official_info)
 
@@ -247,14 +247,14 @@ def s_myrecipes_follow_view():
     email_receive = request.args.get('email_give')
     # print(email_receive)
     # email의 값이 받은 email과 일치하는 document 찾기 & _id 값은 출력에서 제외하기
-    myrecipes_follow_user_info = list(db.save_paik_follow.find({'email': email_receive}, {'_id': 0}))
+    myrecipes_follow_user_info = list(db.save_soomi_follow.find({'email': email_receive}, {'_id': 0}))
     # print(myrecipes_official_user_info)
     s_list_myrecipes_follow_info = []
     for user_email in myrecipes_follow_user_info:
         # print(user_email)
         target_url = user_email['url']
         # print(target_url)
-        myrecipes_follow_user_infos = db.paik_all_recipes.find_one({'url': target_url}, {'_id': 0})
+        myrecipes_follow_user_infos = db.soomi_all_recipes.find_one({'url': target_url}, {'_id': 0})
         s_list_myrecipes_follow_info.append(myrecipes_follow_user_infos)
         # print(list_myrecipes_follow_info)
 

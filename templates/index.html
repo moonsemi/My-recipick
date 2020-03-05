@@ -34,6 +34,11 @@
 	    });
 	    
 
+		function home() {
+			window.location.reload(); 
+		}
+
+
 	    function listing() {
 	      // # Developer 문세미 - ajax 코드 - paik_official 레시피 listing
 			$.ajax({
@@ -145,6 +150,21 @@
 		      				</div>';
 							$('#paik_official').append(card_tamp);
 	    }	
+		// Developer 문세미 - paik_official 레시피 리스트 - 조회
+		function paik_official_recipe_view_list(image,title,posting_day,description,author,url) {
+	      	let card_tamp = '<div class="card">\
+								<img class="card-img-top" src= "'+image+'" alt="Card image cap">\
+							 	<div class="card-body">\
+							 		<h5 class="card-title">'+title+'</h5>\
+							 		<p class="card-text">'+posting_day+'</p>\
+							 		<p class="card-text">'+description+'</p>\
+		     						<p class="card-text">'+author+'</p>\
+		     						<a href="'+url+'" class="view-btn" target="_blank">레시피 보기</a>\
+		     						// <a href="'+url+'" class="copy-btn" onclick="copy_trackback(this.href); return false;">url 저장</a>\
+							 	</div>\
+		      				</div>';
+							$('#paik_official').append(card_tamp);
+	    }	
 
 	    // Developer 문세미 - paik_follow 레시피 listing
 	    function paik_follow_recipe_list(image,title,posting_day,description,author,url) {
@@ -157,6 +177,21 @@
 		     						<p class="card-text">'+author+'</p>\
 		     						<a href="'+url+'" class="view-btn" target="_blank">레시피 보기</a>\
 		     						<a href="'+url+'" class="copy-btn" onclick="copy_trackback(this.href); return false;">url 저장</a>\
+							 	</div>\
+		      				</div>';
+							$('#paik_follow').append(card_tamp);
+	    }	
+		// Developer 문세미 - paik_official 레시피 리스트 - 조회
+		function paik_follow_recipe_view_list(image,title,posting_day,description,author,url) {
+	      	let card_tamp = '<div class="card">\
+								<img class="card-img-top" src= "'+image+'" alt="Card image cap">\
+							 	<div class="card-body">\
+							 		<h5 class="card-title">'+title+'</h5>\
+							 		<p class="card-text">'+posting_day+'</p>\
+							 		<p class="card-text">'+description+'</p>\
+		     						<p class="card-text">'+author+'</p>\
+		     						<a href="'+url+'" class="view-btn" target="_blank">레시피 보기</a>\
+		     						// <a href="'+url+'" class="copy-btn" onclick="copy_trackback(this.href); return false;">url 저장</a>\
 							 	</div>\
 		      				</div>';
 							$('#paik_follow').append(card_tamp);
@@ -193,14 +228,13 @@
 			                </div>';
 		        			$('#soomi_follow').append(temp_html);
      	}
-	
 
       	// Developer 조원행 - 레시피 랜덤출력 listing
       	function random_show_recipes(url, title) {
 		    let temp_html = '<li>\
-		    <a href="'+url+'">'+title+'</a>\
-		    </li>'
-	      	$('#show_all_recipe').append(temp_html);
+								<a href="'+url+'" target="_blank">'+title+'</a>\
+							</li>'
+	      	$('#show_all_recipe > ol').append(temp_html);
 	    }
 
 	    // Developer 문세미 - 레시피 url복사 alert
@@ -226,6 +260,8 @@
  	        
  	        $('#paik_official').html('');
 			$('#paik_follow').html('');
+			$('#soomi_official').html('');
+			$('#soomi_follow').html('');
 
 			// Developer 문세미 - ajax 코드 - paik-follow-recipe_search
 			$.ajax({
@@ -256,6 +292,43 @@
 			            console.log(official_recipe_info);
 			            for (let i = 0; i < official_recipe_info.length; i++) {
 			               paik_official_recipe_list(official_recipe_info[i]['image'],official_recipe_info[i]['title'],official_recipe_info[i]['posting_day'],official_recipe_info[i]['description'],official_recipe_info[i]['author'],official_recipe_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
+				}
+			})
+
+
+			// Developer 조원행 - ajax 코드 - soomi-follow-recipe_search
+			$.ajax({
+				type: "GET",
+				url: "/search_soomi_follow?title_give=" + recipe,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let soomis_follow_info = response['soomis_follow_info'];
+			            console.log(soomis_follow_info);
+			            for (let i = 0; i < soomis_follow_info.length; i++) {
+							soomis_follow_recipes_list(soomis_follow_info[i]['image'],soomis_follow_info[i]['title'],soomis_follow_info[i]['posting_day'],soomis_follow_info[i]['description'],soomis_follow_info[i]['author'],soomis_follow_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
+				}
+			})
+
+			// Developer 조원행 - ajax 코드 - soomi-official-recipe_search
+			$.ajax({
+				type: "GET",
+				url: "/search_soomi_official?title_give=" + recipe,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let soomis_official_info = response['soomis_official_info'];
+			            console.log(soomis_official_info);
+			            for (let i = 0; i < soomis_official_info.length; i++) {
+							soomis_official_recipes_list(soomis_official_info[i]['image'],soomis_official_info[i]['title'],soomis_official_info[i]['posting_day'],soomis_official_info[i]['description'],soomis_official_info[i]['author'],soomis_official_info[i]['url'])
 			            }
 			        } else {
 			        	alert('레시피를 받아오지 못했습니다');
@@ -335,7 +408,7 @@
 			            let myrecipes_official_info = response['myrecipes_official_info'];
 			            console.log(myrecipes_official_info);
 			            for (let i = 0; i < myrecipes_official_info.length; i++) {
-			               paik_official_recipe_list(myrecipes_official_info[i]['image'],myrecipes_official_info[i]['title'],myrecipes_official_info[i]['posting_day'],myrecipes_official_info[i]['description'],myrecipes_official_info[i]['author'],myrecipes_official_info[i]['url'])
+							paik_official_recipe_view_list(myrecipes_official_info[i]['image'],myrecipes_official_info[i]['title'],myrecipes_official_info[i]['posting_day'],myrecipes_official_info[i]['description'],myrecipes_official_info[i]['author'],myrecipes_official_info[i]['url'])
 			            }
 			        } else {
 			        	alert('레시피를 받아오지 못했습니다');
@@ -354,7 +427,7 @@
 			            let myrecipes_follow_info = response['myrecipes_follow_info'];
 			            console.log(myrecipes_follow_info);
 			            for (let i = 0; i < myrecipes_follow_info.length; i++) {
-			               paik_follow_recipe_list(myrecipes_follow_info[i]['image'],myrecipes_follow_info[i]['title'],myrecipes_follow_info[i]['posting_day'],myrecipes_follow_info[i]['description'],myrecipes_follow_info[i]['author'],myrecipes_follow_info[i]['url'])
+							paik_follow_recipe_view_list(myrecipes_follow_info[i]['image'],myrecipes_follow_info[i]['title'],myrecipes_follow_info[i]['posting_day'],myrecipes_follow_info[i]['description'],myrecipes_follow_info[i]['author'],myrecipes_follow_info[i]['url'])
 			            }
 			        } else {
 			        	alert('레시피를 받아오지 못했습니다');
@@ -399,29 +472,109 @@
 				}
 			})  
 		}
+	
+		function delete_recipes(){
+			$.ajax({
+				type: "GET",
+				url: "/search_paik_follow?title_give=" + recipe,
+				data: {}, 
+				success: function(response){
+					if (response['result'] == 'success') {
+			            let follow_recipe_info = response['follow_recipe_info'];
+			            console.log(follow_recipe_info);
+			            for (let i = 0; i < follow_recipe_info.length; i++) {
+			               paik_follow_recipe_list(follow_recipe_info[i]['image'],follow_recipe_info[i]['title'],follow_recipe_info[i]['posting_day'],follow_recipe_info[i]['description'],follow_recipe_info[i]['author'],follow_recipe_info[i]['url'])
+			            }
+			        } else {
+			        	alert('레시피를 받아오지 못했습니다');
+			        }
+				}
+			})
+		}
 	</script>
 	<style>
-	body{font-family: 'Nanum Gothic', sans-serif;}
-	input{width: 100%;}
-	.tab-content .soomi_recipe_container .soomi_follow_recipe_area{
-		border-left: 1px solid #dddddd;
-	}
-	.soomi_recipe_container .card-columns{
-		height: 790px;
-		overflow-y: auto;
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
-	.soomi_recipe_container .card-columns::-webkit-scrollbar {
-		display: none; /* Chrome, Safari, Opera*/
-	}	
+		/* a{font-size: 14px;}
+		button{font-size: 14px;}
+		#show_all_recipe li{
+			margin-bottom: 16px; margin-left: 4px;
+		}
+		#show_all_recipe li:before{
+			content: '';
+			display: inline-block;
+			vertical-align: 3px;
+			width: 4px; height: 4px; 
+			margin-right: 2px;
+			border-radius: 50%;
+			background: #d24400;
+		}
+		#show_all_recipe li a{
+			position: relative;
+			letter-spacing: -1px;;
+		}
+		#show_all_recipe li a:after{
+			content: '';
+			display: inline-block;
+			position: absolute; top: 50%; left: 0;
+			transform: translateY(-50%);
+			width: 0; height: 2px;
+			background: #d24400;
+			opacity: 0.5;
+			transition: ease-in-out width 0.2s;
+		}
+		#show_all_recipe li a:hover:after{
+			content: '';
+			display: inline-block;
+			position: absolute; top: 50%; left: 0;
+			transform: translateY(-50%);
+			width: 100%; height: 2px;
+			background: #d24400;
+		}
+
+		.recipes_save_container .save-btn{
+			width: 100%; line-height: 35px;
+			padding: 0 10px; margin-top: 15px;
+			border: 1px solid #bbbbbb;
+			border-radius: 5px;
+			background: #eeeeee;
+			transition: all 0.4s;
+		}
+		.recipes_save_container .save-btn:hover{
+			border: 1px solid #d24400;
+			background-color: #d24400;  color: #ffffff;
+		}
+		.myrecipes_view_container .myrecipe-view-btn{
+			width: 100%; line-height: 35px;
+			padding: 0 10px; margin-top: 15px;
+			border: 1px solid #bbbbbb;
+			border-radius: 5px;
+			background: #eeeeee;
+			transition: all 0.4s;
+		}
+		.myrecipes_view_container .myrecipe-view-btn:hover{
+			border: 1px solid #d24400;
+			background-color: #d24400;  color: #ffffff;
+		}
+		footer{
+			position: fixed; bottom: 0;
+			width: 100%;
+			padding: 8px 0;
+			background: #d24400;
+		}
+		footer .copy{
+			text-align: center;;
+			color: #ffffff; font-size: 13px;;
+		}
+		.paik_recipe_container .card-columns, .soomi_recipe_container .card-columns{
+			height: 792px;
+			overflow-y: auto;
+		} */
 	</style>
 </head>
-<body>
+<body>	
 	<div class="wrap clearfix">
 		<div class="l-side">
 			<h1 class="logo hidden">마이레시픽</h1>
-			<div class="logo"><a href="javascript:;"><img src="{{ url_for('static', filename='images/logo.png')}}" alt="로고 이미지"></a></div>
+			<div onclick="home()" class="logo"><a href="javascript:;"><img src="{{ url_for('static', filename='images/logo.png')}}" alt="로고 이미지"></a></div>
 			<!-- 레시피 검색 -->
 			<div class="recipes_search_container">
 				<input type="text" id="recipe_input" placeholder="레시피를 입력해주세요.">
@@ -429,10 +582,9 @@
 			</div>
 			<!-- 추천레시피 랜덤출력 -->
 			<div class="recipes_save_container">
-				<h2>오늘의 추천레시피</h2>
+				<h2>오늘의 추천레시피!</h2>
 				<div id="show_all_recipe">
-					<ol>
-					</ol>
+					<ol></ol>
 				</div>
 			</div>	
 		</div>
@@ -588,7 +740,10 @@
 				<button class="myrecipe-view-btn" onclick="myrecipes_view()">나의레시피 보기</button>
 			</div>	
 		</div>			
-				
+		
+		<footer>
+			<p class="copy">Copyright ⓒ Developer 문세미, 조원행. All Rights Reserved.</p>
+		</footer>
 	</div>
 </body>
 </html>
