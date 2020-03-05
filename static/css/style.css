@@ -74,7 +74,6 @@ input{
 a{font-size: 14px;}
 button{font-size: 14px;}
 .wrap > div{			
-    padding: 20px 0 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -83,6 +82,7 @@ button{font-size: 14px;}
 .l-side{
     position: fixed;
     width: 15%; height: 100vh;
+    padding: 20px 10px;
     border-right: 1px solid #d24400;
 }
 .recipes_search_container{
@@ -138,8 +138,8 @@ button{font-size: 14px;}
 
 .c-side{
     float: left;
-    width: 70%;
-    margin-left: 15%;
+    width: 70%; 
+    margin-left: 15%; padding: 20px 10px 0;
 }
 .tabs li{
     float: left; 
@@ -237,6 +237,7 @@ button{font-size: 14px;}
 .r-side{
     position: fixed; right: 0;
     width: 15%; height: 100vh;
+    padding: 20px 10px;
     border-left: 1px solid #d24400;
 }
 .recipes_save_container{
