@@ -24,7 +24,7 @@ input, select, button {
     -webkit-border-radius: 0;    
 }
 input{
-    display: inline-block;
+    display: inline-block; width: 100%;
     padding-left: 13px;
 }
 .clearfix:after{
@@ -37,7 +37,7 @@ select::-ms-expand{display:none;}
 input:focus, select:focus, button:focus, textarea:focus {outline: none; }
 input[type="checkbox"], input[type="radio"] {width: auto; height: auto; }
 input[type="button"], input[type="file"], input[type="checkbox"], input[type="radio"]{cursor: pointer;}
-button{cursor: pointer; padding: 0; margin: 0;}
+button{cursor: pointer; padding: 0; margin: 0; font-family: 'Nanum Gothic', sans-serif;}
 label, select{cursor: pointer;}
 /* placeholder */
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */ color:#cccccc; font-family: NanumSquare;}
@@ -57,14 +57,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* !!! my css!!! */
 body{
     overflow-y: hidden;
-    color: #333333;
+    color: #333333; font-family: 'Nanum Gothic', sans-serif;
 }
 h2{
-    font-size: 22px;
+    font-size: 18px;
+    letter-spacing: -1px;
 }
 input{
     display: inline-block; width: 100%;
     padding-left: 13px;
+    font-family: 'Nanum Gothic', sans-serif;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -110,9 +112,13 @@ input{
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    cursor: pointer;
 }
 .tabs li.active{
     background: #d24400;
+}
+.tabs li a{
+    font-size: 17px; font-weight: bold;   
 }
 .tabs li.active a{
     color: #ffffff;
@@ -126,9 +132,12 @@ input{
     -webkit-box-sizing: border-box;
 }
 .tab-content .paik_recipe_container > div h3, .tab-content .soomi_recipe_container > div h3{
-    margin-top: 20px;
+    margin-top: 20px; margin-bottom: 10px;
 }
 .tab-content .paik_recipe_container .paik_follow_recipe_area{
+    border-left: 1px solid #dddddd;
+}
+.tab-content .soomi_recipe_container .soomi_follow_recipe_area{
     border-left: 1px solid #dddddd;
 }
 .tab-content .card{
@@ -147,17 +156,32 @@ input{
     -ms-overflow-style: none; /* IE and Edge */
        scrollbar-width: none; /* Firefox */
 }
+.soomi_recipe_container .card-columns{
+    height: 790px;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
 .paik_recipe_container .card-columns::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
+}
+.soomi_recipe_container .card-columns::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+.card .card-img-top{
+    border-radius: 6px 6px 0 0;
 }
 .card .card-body{
     margin: 20px;
 }
 .card .card-body .card-title{
     margin-bottom: 20px;
+    font-size: 15px;
 }
 .card .card-body .card-text{
     margin-bottom: 20px;
+    font-size: 14px; letter-spacing: 0.005em;
+    line-height: 23.5px; text-align: justify;    
 }
 .card .card-body .view-btn{
     display: inline-block;

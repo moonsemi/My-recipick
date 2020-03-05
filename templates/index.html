@@ -5,11 +5,9 @@
 	<title>my recipick</title>
 	<!-- My Work CSS -->
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
-	<!-- Bootstrap CSS -->
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 	<!-- web-font CSS -->
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-	<!-- JQuery를 import 합니다 -->
+	<!-- JQuery를 import -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 	    $(document).ready(function(){
@@ -25,29 +23,10 @@
 				$(activeTab).show(); 
 				return false;
             });
-			
-			// 퀵메뉴(totop, tobottom) js
-			$(window).scroll(function(){
-				if($(this).scrollTop() > 1){
-					$('.quickmenu').fadeIn(200);
-				} else{
-					$('.quickmenu').fadeOut(200);
-				}
-			});
-			$('.totop-btn').click(function(){
-				$('html, body').animate({scrollTop : 0},400);
-				return false;
-			});
-			$('.tobottom-btn').click(function(){
-				var scrollHeight = $(document).height();
-				$('html, body').animate({scrollTop : scrollHeight},600);
-				return false;
-			});
 
 	    	// 첫 실행 시 작동하는 js
 			$('#paik_official').html('');
 			$('#paik_follow').html('');
-
 			$('#soomi_official').html('');
 			$('#soomi_follow').html('');
 
@@ -421,6 +400,22 @@
 			})  
 		}
 	</script>
+	<style>
+	body{font-family: 'Nanum Gothic', sans-serif;}
+	input{width: 100%;}
+	.tab-content .soomi_recipe_container .soomi_follow_recipe_area{
+		border-left: 1px solid #dddddd;
+	}
+	.soomi_recipe_container .card-columns{
+		height: 790px;
+		overflow-y: auto;
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+	.soomi_recipe_container .card-columns::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}	
+	</style>
 </head>
 <body>
 	<div class="wrap clearfix">
@@ -558,7 +553,7 @@
 							</div>					
 						</div>
 					</div>
-					<div class="soomi_official_recipe_area">
+					<div class="soomi_follow_recipe_area">
 						<h3>[김수미 따라하기레시피]</h3>
 						<div class="card-columns" id="soomi_follow">
 							<div class="card">
